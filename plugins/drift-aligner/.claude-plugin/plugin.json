@@ -1,0 +1,14 @@
+{
+  "name": "drift-aligner",
+  "description": "Per-turn intent-preservation alignment via Hunt-Szymanski LCS (D1), Vitter reservoir bookkeeping (D3), and Baum-Welch HMM task-boundary inference (D2). Emits advisory to stderr when preservation < threshold.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "intent-preservation",
+    "drift-detection"
+  ],
+  "agents": "./agents/"
+}

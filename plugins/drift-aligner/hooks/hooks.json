@@ -1,0 +1,17 @@
+{
+  "description": "drift-aligner hooks — per-turn PostToolUse alignment. Advisory-only, fail-open. Never blocks tool completion.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/post-tool-use/align-turn.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
