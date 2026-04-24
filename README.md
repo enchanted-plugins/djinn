@@ -50,7 +50,7 @@ Not for:
 - [Roadmap](#roadmap)
 - [The Science Behind Djinn](#the-science-behind-djinn)
 - [vs Everything Else](#vs-everything-else)
-- [Agent Conduct (10 Modules)](#agent-conduct-10-modules)
+- [Agent Conduct (12 Modules)](#agent-conduct-12-modules)
 - [Architecture](#architecture)
 - [Acknowledgments](#acknowledgments)
 - [Versioning & release cadence](#versioning--release-cadence)
@@ -223,9 +223,9 @@ Full derivations live in [docs/science/README.md](docs/science/README.md). Each 
 | GPT-4-as-judge / Claude-as-judge single-model | Single-family judge correlates with single-family agent via shared priors, not truth | LLM judgment isolated to the Opus orchestrator's final verdict — never in the scoring path |
 | Emu (sibling) misused as intent-preservation | A1 Markov catches token-level drift; session can be green on tool patterns and silently redirected | Djinn measures semantic intent — orthogonal signal, coexists with Emu |
 
-## Agent Conduct (10 Modules)
+## Agent Conduct (12 Modules)
 
-Ten behavioral modules live in [`shared/conduct/`](shared/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanted-plugins/schematic) canonical template and not edited by Djinn.
+Twelve behavioral modules live in [`shared/conduct/`](shared/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanted-plugins/schematic) canonical template and not edited by Djinn.
 
 | Module | Covers |
 |--------|--------|
@@ -239,6 +239,8 @@ Ten behavioral modules live in [`shared/conduct/`](shared/conduct/). They apply 
 | [skill-authoring](shared/conduct/skill-authoring.md) | SKILL.md frontmatter discipline, discovery test |
 | [hooks](shared/conduct/hooks.md) | Advisory-only hooks, injection over denial, fail-open |
 | [precedent](shared/conduct/precedent.md) | Log self-observed failures to `state/precedent-log.md` |
+| [tier-sizing](shared/conduct/tier-sizing.md) | Agent-tier budget allocation per task class |
+| [web-fetch](shared/conduct/web-fetch.md) | External-URL-handling hygiene |
 
 ## Architecture
 
@@ -247,7 +249,7 @@ djinn/
 ├── .claude-plugin/marketplace.json
 ├── CLAUDE.md                               # agent contract (8 sections)
 ├── shared/
-│   ├── conduct/                            # 10 modules — inherited verbatim from schematic
+│   ├── conduct/                            # 12 modules — inherited verbatim from schematic
 │   └── scripts/
 │       ├── engines/c1_lcs.py               # D1 Hunt-Szymanski LCS
 │       ├── engines/c2_hmm.py               # D2 Baum-Welch HMM
