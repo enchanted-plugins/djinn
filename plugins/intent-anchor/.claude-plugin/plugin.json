@@ -1,0 +1,13 @@
+{
+  "name": "intent-anchor",
+  "description": "Captures the first-turn session intent into state/anchor.json on SessionStart; refreshes the anchor on UserPromptSubmit when the developer adds new constraints. Owns engines D1 (Hunt-Szymanski LCS) and D3 (Vitter reservoir).",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "intent-preservation",
+    "session-anchor"
+  ]
+}

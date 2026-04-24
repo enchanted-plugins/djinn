@@ -1,0 +1,29 @@
+{
+  "description": "intent-anchor hooks — advisory-only, fail-open. Capture anchor on SessionStart; refresh on UserPromptSubmit when new constraints appear.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start/capture-anchor.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/user-prompt-submit/refresh-anchor.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
