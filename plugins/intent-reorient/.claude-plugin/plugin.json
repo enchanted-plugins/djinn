@@ -1,0 +1,17 @@
+{
+  "name": "intent-reorient",
+  "description": "Developer-facing skill for manual re-pinning of the session intent mid-session. Invoked via /reorient when the developer wants to override the captured anchor with a new goal. Also hosts the orchestrator Opus-tier judgment agent.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "intent-preservation",
+    "manual-reorient"
+  ],
+  "skills": [
+    "./skills/reorient/"
+  ],
+  "agents": "./agents/"
+}
