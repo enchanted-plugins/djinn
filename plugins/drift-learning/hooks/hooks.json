@@ -1,0 +1,17 @@
+{
+  "description": "drift-learning: PreCompact posterior update. Advisory, fail-open. Persists session statistics into the drift-signature posterior.",
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-compact/update-posterior.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
