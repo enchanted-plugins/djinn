@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Djinn"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - alias: klaiderman
+    affiliation: "enchanted-plugins"
+repository-code: "https://github.com/enchanted-plugins/djinn"
+url: "https://github.com/enchanted-plugins/djinn"
+license: MIT
+version: "0.1.0"
+date-released: "2026-04-24"
+abstract: "Pins the original session intent, watches for long-horizon drift across /compact, and reasserts the goal when the agent diverges."
+keywords:
+  - claude-code
+  - enchanted-plugins
+  - intent-preservation
+  - drift-detection
+  - llm
