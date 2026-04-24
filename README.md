@@ -23,7 +23,7 @@ Pins the original session intent, watches for long-horizon drift across `/compac
 
 ## Origin
 
-**Djinn** takes its name from **Minecraft mod: Ars Nouveau (BaileyHoll 2020)** — a fey familiar bound to a Djinn Charm anchor that collects every drop from nearby mobs back to that fixed point, never wandering from it. That is literally the function of this plugin: bind the original session intent as an anchor, collect every agent turn's alignment signal back to that anchor, and reassert the bound goal the moment the agent drifts away from it.
+**Djinn** takes its name from **Ars Nouveau** — a fey familiar bound to a Djinn Charm anchor that collects every drop from nearby mobs back to that fixed point, never wandering from it. That is literally the function of this plugin: bind the original session intent as an anchor, collect every agent turn's alignment signal back to that anchor, and reassert the bound goal the moment the agent drifts away from it.
 
 The question this plugin answers: *Am I still working on what you asked?*
 
