@@ -16,6 +16,8 @@ These apply to every skill in every plugin. Load once; do not re-derive.
 - @shared/conduct/skill-authoring.md — SKILL.md frontmatter discipline, discovery test
 - @shared/conduct/hooks.md — advisory-only hooks, injection over denial, fail-open
 - @shared/conduct/precedent.md — log self-observed failures to `state/precedent-log.md`; consult before risky steps
+- @shared/conduct/tier-sizing.md — agent-tier budget allocation per task class
+- @shared/conduct/web-fetch.md — external-URL-handling hygiene
 
 When a module conflicts with a plugin-local instruction, the plugin wins — but log the override.
 
