@@ -1,0 +1,16 @@
+{
+  "name": "utterance-rank",
+  "description": "On-demand PageRank analysis (D4 Brin-Page 1998) over the session utterance-to-artifact DAG. Ranks which agent utterances actually shaped the final output — DAG edges from file-touch overlap are provable, not inferred from semantic similarity. Invoked via /rank.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "pagerank",
+    "utterance-analysis"
+  ],
+  "skills": [
+    "./skills/rank/"
+  ]
+}
