@@ -1,0 +1,17 @@
+{
+  "description": "compact-guard: PreCompact hook. Inject anchor as structural hint before the compaction model runs. Advisory, fail-open.",
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-compact/inject-anchor.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

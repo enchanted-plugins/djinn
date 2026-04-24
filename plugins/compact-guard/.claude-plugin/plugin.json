@@ -1,0 +1,13 @@
+{
+  "name": "compact-guard",
+  "description": "PreCompact hook that injects the captured session-intent anchor as a structural hint BEFORE the compaction model sees the context. Survival of the original goal is structurally guaranteed by the hook lifecycle — not left to the compactor's recency bias. Owns engine D1 (LCS for survival-check).",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "compact",
+    "intent-injection"
+  ]
+}
