@@ -1,0 +1,54 @@
+{
+  "name": "djinn",
+  "owner": {
+    "name": "enchanted-plugins"
+  },
+  "metadata": {
+    "description": "Pins the original session intent, watches for long-horizon drift across /compact, and reasserts the goal when the agent diverges.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "full",
+      "source": "./plugins/full",
+      "description": "Meta-plugin. One install pulls in all six Djinn sub-plugins via dependency resolution.",
+      "category": "meta"
+    },
+    {
+      "name": "intent-anchor",
+      "source": "./plugins/intent-anchor",
+      "description": "Captures first-turn session intent on SessionStart; refreshes on UserPromptSubmit when new constraints appear.",
+      "category": "validator"
+    },
+    {
+      "name": "drift-aligner",
+      "source": "./plugins/drift-aligner",
+      "description": "Per-turn intent-preservation alignment via Hunt-Szymanski LCS + Baum-Welch HMM + Vitter reservoir.",
+      "category": "validator"
+    },
+    {
+      "name": "compact-guard",
+      "source": "./plugins/compact-guard",
+      "description": "PreCompact hook that injects the captured intent anchor as a structural hint before the compaction model runs.",
+      "category": "validator"
+    },
+    {
+      "name": "utterance-rank",
+      "source": "./plugins/utterance-rank",
+      "description": "On-demand PageRank analysis over the session utterance-to-artifact DAG.",
+      "category": "executor"
+    },
+    {
+      "name": "drift-learning",
+      "source": "./plugins/drift-learning",
+      "description": "Per-(intent-type × developer) drift-signature posterior via D5 Gauss Accumulation.",
+      "category": "executor"
+    },
+    {
+      "name": "intent-reorient",
+      "source": "./plugins/intent-reorient",
+      "description": "Developer-facing /reorient skill for manual re-pin of the session intent mid-session. Hosts the Opus orchestrator.",
+      "category": "orchestrator"
+    }
+  ]
+}
