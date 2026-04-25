@@ -282,51 +282,9 @@ Twelve behavioral modules live in [`shared/conduct/`](shared/conduct/). They app
 
 ## Architecture
 
-```
-djinn/
-├── .claude-plugin/marketplace.json
-├── CLAUDE.md                               # agent contract (8 sections)
-├── shared/
-│   ├── conduct/                            # 12 modules — inherited verbatim from schematic
-│   └── scripts/
-│       ├── engines/c1_lcs.py               # D1 Hunt-Szymanski LCS
-│       ├── engines/c2_hmm.py               # D2 Baum-Welch HMM
-│       ├── engines/c3_reservoir.py         # D3 Vitter Algorithm R
-│       ├── engines/c4_pagerank.py          # D4 Brin-Page PageRank
-│       ├── engines/c5_gauss.py             # D5 Gauss Accumulation
-│       ├── anchor.py                       # intent capture + classification + refresh
-│       ├── bootstrap_ci.py                 # honest-numbers 95% CI
-│       ├── state_io.py                     # atomic write-tmp-rename persistence
-│       ├── publish.py                      # event-bus publisher (copied from Pech)
-│       └── events/__init__.py              # four typed publish functions
-├── plugins/
-│   ├── intent-anchor/                      # SessionStart + UserPromptSubmit
-│   ├── drift-aligner/                      # PostToolUse + 2 agents
-│   ├── compact-guard/                      # PreCompact
-│   ├── utterance-rank/                     # /rank
-│   ├── drift-learning/                     # PreCompact posterior
-│   ├── intent-reorient/                    # /reorient + orchestrator
-│   └── full/                               # meta
-├── docs/
-│   ├── science/README.md                   # D1–D5 derivations
-│   ├── architecture/README.md              # diagram generation + Phase-2 notes
-│   ├── adr/                                # architecture decision records
-│   ├── assets/                             # mermaid sources (Phase-2)
-│   ├── ecosystem.md                        # cross-sibling contract
-│   ├── getting-started.md
-│   ├── installation.md
-│   ├── troubleshooting.md
-│   ├── upgrading.md
-│   ├── brand-guide.md
-│   ├── faq.md
-│   ├── org-profile-README.md
-│   └── ROADMAP.md
-└── tests/                                  # 22 stdlib-only unittests
-    ├── test_engines.py
-    ├── test_hooks_shape.py
-    ├── test_plugin_json.py
-    └── test_subagent_guard.py
-```
+Interactive architecture explorer with sub-plugin diagrams, agent cards, and hook binding maps:
+
+**[docs/architecture/](docs/architecture/)** — auto-generated from the codebase. Run `python docs/architecture/generate.py` to regenerate.
 
 ## Acknowledgments
 
