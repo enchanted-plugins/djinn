@@ -1,0 +1,70 @@
+---
+title: Djinn per-session state flow
+config:
+  look: neo
+  theme: dark
+  flowchart:
+    curve: basis
+    padding: 18
+    nodeSpacing: 44
+    rankSpacing: 54
+    htmlLabels: true
+    subGraphTitleMargin:
+      top: 14
+      bottom: 18
+---
+flowchart TB
+    TitleBlock["<div style='font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-align:center;min-width:1000px;padding:6px 10px;line-height:1.8'><div style='color:#58a6ff;font-size:15px;letter-spacing:6px;border-bottom:1px solid #1e3a5f;padding-bottom:10px;margin-bottom:10px'>DJINN &nbsp;·&nbsp; PER-SESSION&nbsp;STATE&nbsp;FLOW</div><div style='display:flex;gap:40px;justify-content:center;font-size:11px;color:#8b949e;letter-spacing:2px'><span>DWG&nbsp;&nbsp;<b style='color:#e6edf3'>DJN-003</b></span><span>REV&nbsp;&nbsp;<b style='color:#e6edf3'>A.1</b></span><span>PERSISTENCE&nbsp;&nbsp;<b style='color:#e6edf3'>atomic&nbsp;write-tmp-rename</b></span><span>SHEET&nbsp;&nbsp;<b style='color:#e6edf3'>03&nbsp;/&nbsp;03</b></span></div></div>"]
+
+    Events(["<div style='text-align:center;line-height:1.8;padding:4px 12px'><b style='letter-spacing:1.5px'>CLAUDE&nbsp;CODE&nbsp;HOOKS</b><br/><em style='color:#8b949e;font-size:13px;font-weight:400'>SessionStart · UserPromptSubmit · PostToolUse · PreCompact</em></div>"])
+
+    subgraph AnchorJournal["<div style='text-align:center;min-width:440px;line-height:1.9'><b style='letter-spacing:1.5px;color:#58a6ff'>INTENT-ANCHOR&nbsp;JOURNAL</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>captured&nbsp;once&nbsp;·&nbsp;appended&nbsp;on&nbsp;refresh</small></div>"]
+        anchor["<div style='text-align:center;line-height:1.7;padding:2px 4px'>anchor.json<br/><small style='color:#6e7681'>{session_id,&nbsp;anchor_text,&nbsp;sha1,<br/>intent_type,&nbsp;captured_at,&nbsp;deltas[]}</small></div>"]
+    end
+
+    subgraph AlignJournal["<div style='text-align:center;min-width:440px;line-height:1.9'><b style='letter-spacing:1.5px;color:#d75952'>DRIFT-ALIGNER&nbsp;JOURNALS</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>per-turn&nbsp;D1&nbsp;+&nbsp;D2&nbsp;+&nbsp;D3&nbsp;bookkeeping</small></div>"]
+        reservoir_file["<div style='text-align:center;line-height:1.7;padding:2px 4px'>reservoir.json<br/><small style='color:#6e7681'>Vitter&nbsp;k=32&nbsp;sample<br/>{n_seen,&nbsp;reservoir[turn,&nbsp;score,&nbsp;tool]}</small></div>"]
+        states_file["<div style='text-align:center;line-height:1.7;padding:2px 4px'>states.jsonl<br/><small style='color:#6e7681'>append-only&nbsp;HMM&nbsp;observations<br/>{turn,&nbsp;tool,&nbsp;topic,&nbsp;score}</small></div>"]
+    end
+
+    subgraph LearnJournal["<div style='text-align:center;min-width:440px;line-height:1.9'><b style='letter-spacing:1.5px;color:#bc8cff'>DRIFT-LEARNING&nbsp;JOURNALS</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>cross-session&nbsp;posterior&nbsp;·&nbsp;α=0.3</small></div>"]
+        posteriors_file["<div style='text-align:center;line-height:1.7;padding:2px 4px'>posteriors.json<br/><small style='color:#6e7681'>keyed&nbsp;by&nbsp;(intent_type,&nbsp;developer)<br/>{median,&nbsp;sigma,&nbsp;p10,&nbsp;n_sessions}</small></div>"]
+        learnings_file["<div style='text-align:center;line-height:1.7;padding:2px 4px'>learnings.jsonl<br/><small style='color:#6e7681'>append-only&nbsp;session&nbsp;summary<br/>backtesting&nbsp;source</small></div>"]
+    end
+
+    subgraph RankJournal["<div style='text-align:center;min-width:440px;line-height:1.9'><b style='letter-spacing:1.5px;color:#d29922'>UTTERANCE-RANK&nbsp;JOURNAL</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>/rank&nbsp;on-demand&nbsp;D4&nbsp;output</small></div>"]
+        last_rank["<div style='text-align:center;line-height:1.7;padding:2px 4px'>last-rank.json<br/><small style='color:#6e7681'>top-5&nbsp;by&nbsp;PageRank&nbsp;+<br/>DAG&nbsp;file-touch&nbsp;edges</small></div>"]
+    end
+
+    subgraph Bus["<div style='text-align:center;min-width:1000px;line-height:2'><div><span style='font-family:ui-monospace,monospace;color:#8b949e;font-size:11px;letter-spacing:3px'>ENCHANTED-MCP&nbsp;BUS</span>&nbsp;&nbsp;·&nbsp;&nbsp;<b style='letter-spacing:2px'>4&nbsp;PUBLISHED&nbsp;·&nbsp;2&nbsp;OPTIONAL&nbsp;SUBSCRIPTIONS</b></div><div style='color:#6e7681;font-size:11px;font-family:ui-monospace,monospace;letter-spacing:1.2px'>djinn.intent.captured&nbsp;·&nbsp;djinn.drift.detected&nbsp;·&nbsp;djinn.compact.intent-hint.injected&nbsp;·&nbsp;djinn.intent.refreshed</div></div>"]
+        direction LR
+        pub["<div style='text-align:center;line-height:1.7;padding:2px 4px'>PUBLISH<br/>djinn.*<br/><small style='color:#6e7681'>shared/publish.py</small></div>"] --> sub["<div style='text-align:center;line-height:1.7;padding:2px 4px'>SUBSCRIBE&nbsp;(opt)<br/>emu.checkpoint.saved<br/>crow.change.classified<br/><small style='color:#6e7681'>Phase-2</small></div>"]
+    end
+
+    Query["<div style='text-align:center;min-width:1000px;line-height:1.8;padding:6px 10px'><b style='letter-spacing:1.5px;color:#79c0ff'>DEVELOPER&nbsp;QUERY&nbsp;SURFACE</b><br/><em style='color:#8b949e;font-size:13px;font-weight:400'>stderr&nbsp;advisory&nbsp;(PostToolUse)&nbsp;&nbsp;·&nbsp;&nbsp;/rank&nbsp;&nbsp;·&nbsp;&nbsp;/reorient</em></div>"]
+
+    Events --> AnchorJournal
+    Events --> AlignJournal
+    Events --> LearnJournal
+    Events --> RankJournal
+    AnchorJournal --> Bus
+    AlignJournal --> Bus
+    LearnJournal --> Bus
+    RankJournal --> Query
+    Bus --> Query
+
+    classDef titleBlock fill:#06111f,stroke:#1e3a5f,stroke-width:1px,color:#e6edf3,rx:4,ry:4
+    classDef events fill:#0a1628,stroke:#1e3a5f,stroke-width:1.5px,color:#e6edf3,rx:10,ry:10
+    classDef query fill:#0f1d33,stroke:#79c0ff,stroke-width:1.5px,color:#79c0ff,rx:8,ry:8
+
+    class TitleBlock titleBlock
+    class Events events
+    class Query query
+
+    style AnchorJournal fill:#0f1d33,stroke:#58a6ff,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style AlignJournal fill:#0f1d33,stroke:#d75952,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style LearnJournal fill:#0f1d33,stroke:#bc8cff,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style RankJournal fill:#0f1d33,stroke:#d29922,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style Bus fill:#0f1d33,stroke:#3fb950,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+
+    linkStyle default stroke:#8b949e,stroke-width:1.5px

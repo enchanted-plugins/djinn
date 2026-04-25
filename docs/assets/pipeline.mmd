@@ -1,0 +1,70 @@
+---
+title: Djinn six-subplugin architecture
+config:
+  look: neo
+  theme: dark
+  flowchart:
+    curve: basis
+    padding: 18
+    nodeSpacing: 44
+    rankSpacing: 54
+    htmlLabels: true
+    subGraphTitleMargin:
+      top: 14
+      bottom: 18
+---
+flowchart TB
+    TitleBlock["<div style='font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-align:center;min-width:940px;padding:6px 10px;line-height:1.8'><div style='color:#58a6ff;font-size:15px;letter-spacing:6px;border-bottom:1px solid #1e3a5f;padding-bottom:10px;margin-bottom:10px'>DJINN &nbsp;·&nbsp; INTENT&nbsp;ANCHOR &nbsp;·&nbsp; ARCHITECTURE</div><div style='display:flex;gap:40px;justify-content:center;font-size:11px;color:#8b949e;letter-spacing:2px'><span>DWG&nbsp;&nbsp;<b style='color:#e6edf3'>DJN-001</b></span><span>REV&nbsp;&nbsp;<b style='color:#e6edf3'>A.1</b></span><span>SCALE&nbsp;&nbsp;<b style='color:#e6edf3'>1:1</b></span><span>ENGINES&nbsp;&nbsp;<b style='color:#e6edf3'>D1&nbsp;·&nbsp;D2&nbsp;·&nbsp;D3&nbsp;·&nbsp;D4&nbsp;·&nbsp;D5</b></span><span>SHEET&nbsp;&nbsp;<b style='color:#e6edf3'>01&nbsp;/&nbsp;01</b></span></div></div>"]
+
+    Session(["<div style='text-align:center;line-height:1.8;padding:4px 12px'><b style='letter-spacing:1.5px'>INPUT&nbsp;·&nbsp;CLAUDE&nbsp;CODE&nbsp;SESSION</b><br/><em style='color:#8b949e;font-size:13px;font-weight:400'>SessionStart + UserPromptSubmit + PostToolUse + PreCompact</em></div>"])
+
+    subgraph Capture["<div style='text-align:center;min-width:940px;line-height:2'><div><span style='font-family:ui-monospace,monospace;color:#8b949e;font-size:11px;letter-spacing:3px'>SUB-PLUGIN&nbsp;01</span>&nbsp;&nbsp;·&nbsp;&nbsp;<b style='letter-spacing:2px'>INTENT-ANCHOR</b>&nbsp;&nbsp;·&nbsp;&nbsp;<span style='color:#58a6ff;letter-spacing:1px'>D1&nbsp;+&nbsp;D3</span></div><div style='color:#6e7681;font-size:11px;font-family:ui-monospace,monospace;letter-spacing:1.2px'>ROLE&nbsp;·&nbsp;first-turn&nbsp;capture&nbsp;+&nbsp;constraint-delta&nbsp;refresh&nbsp;&nbsp;·&nbsp;&nbsp;τ&nbsp;&lt;&nbsp;5ms</div></div>"]
+        direction LR
+        capture["<div style='text-align:center;line-height:1.7;padding:2px 4px'>CAPTURE<br/>FIRST&nbsp;PROMPT<br/><small style='color:#6e7681;letter-spacing:1px'>sha1&nbsp;·&nbsp;intent_type</small></div>"] --> write["<div style='text-align:center;line-height:1.7;padding:2px 4px'>WRITE<br/>anchor.json<br/><small style='color:#6e7681;letter-spacing:1px'>atomic&nbsp;·&nbsp;out-of-context</small></div>"] --> refresh["<div style='text-align:center;line-height:1.7;padding:2px 4px'>REFRESH<br/>ON&nbsp;CONSTRAINT<br/><small style='color:#6e7681;letter-spacing:1px'>D1&nbsp;ratio&nbsp;&lt;&nbsp;0.5</small></div>"]
+    end
+
+    subgraph Align["<div style='text-align:center;min-width:940px;line-height:2'><div><span style='font-family:ui-monospace,monospace;color:#8b949e;font-size:11px;letter-spacing:3px'>SUB-PLUGIN&nbsp;02</span>&nbsp;&nbsp;·&nbsp;&nbsp;<b style='letter-spacing:2px'>DRIFT-ALIGNER</b>&nbsp;&nbsp;·&nbsp;&nbsp;<span style='color:#d75952;letter-spacing:1px'>D1&nbsp;+&nbsp;D2&nbsp;+&nbsp;D3</span></div><div style='color:#6e7681;font-size:11px;font-family:ui-monospace,monospace;letter-spacing:1.2px'>ROLE&nbsp;·&nbsp;per-turn&nbsp;alignment&nbsp;+&nbsp;stderr&nbsp;advisory&nbsp;&nbsp;·&nbsp;&nbsp;threshold&nbsp;0.7&nbsp;∧&nbsp;N&nbsp;≥&nbsp;5&nbsp;&nbsp;·&nbsp;&nbsp;aligner&nbsp;=&nbsp;Haiku&nbsp;·&nbsp;topic-tagger&nbsp;=&nbsp;Sonnet</div></div>"]
+        direction LR
+        lcs["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D1&nbsp;LCS<br/>preservation<br/><small style='color:#6e7681;letter-spacing:1px'>normalized&nbsp;tokens</small></div>"] --> reservoir["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D3&nbsp;RESERVOIR<br/>update&nbsp;(k=32)<br/><small style='color:#6e7681;letter-spacing:1px'>Algorithm&nbsp;R</small></div>"] --> hmm["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D2&nbsp;HMM<br/>state&nbsp;label<br/><small style='color:#6e7681;letter-spacing:1px'>ON_TASK&nbsp;·&nbsp;SIDEQUEST&nbsp;·&nbsp;LOST</small></div>"] --> ci["<div style='text-align:center;line-height:1.7;padding:2px 4px'>BOOTSTRAP<br/>95%&nbsp;CI<br/><small style='color:#6e7681;letter-spacing:1px'>value&nbsp;·&nbsp;lo&nbsp;·&nbsp;hi&nbsp;·&nbsp;N</small></div>"]
+    end
+
+    subgraph Guard["<div style='text-align:center;min-width:940px;line-height:2'><div><span style='font-family:ui-monospace,monospace;color:#8b949e;font-size:11px;letter-spacing:3px'>SUB-PLUGIN&nbsp;03</span>&nbsp;&nbsp;·&nbsp;&nbsp;<b style='letter-spacing:2px'>COMPACT-GUARD</b>&nbsp;&nbsp;·&nbsp;&nbsp;<span style='color:#3fb950;letter-spacing:1px'>D1</span></div><div style='color:#6e7681;font-size:11px;font-family:ui-monospace,monospace;letter-spacing:1.2px'>ROLE&nbsp;·&nbsp;PreCompact&nbsp;structural&nbsp;injection&nbsp;&nbsp;·&nbsp;&nbsp;survival&nbsp;guaranteed&nbsp;by&nbsp;lifecycle,&nbsp;not&nbsp;recency</div></div>"]
+        direction LR
+        read_anchor["<div style='text-align:center;line-height:1.7;padding:2px 4px'>READ<br/>anchor&nbsp;+&nbsp;deltas<br/><small style='color:#6e7681;letter-spacing:1px'>intent-anchor/state</small></div>"] --> inject["<div style='text-align:center;line-height:1.7;padding:2px 4px'>INJECT<br/>STRUCTURAL&nbsp;HINT<br/><small style='color:#6e7681;letter-spacing:1px'>stdout&nbsp;·&nbsp;before&nbsp;compactor</small></div>"]
+    end
+
+    subgraph Support["<div style='text-align:center;min-width:940px;line-height:2'><div><span style='font-family:ui-monospace,monospace;color:#8b949e;font-size:11px;letter-spacing:3px'>SUB-PLUGINS&nbsp;04&nbsp;·&nbsp;05&nbsp;·&nbsp;06</span>&nbsp;&nbsp;·&nbsp;&nbsp;<b style='letter-spacing:2px'>UTTERANCE-RANK&nbsp;&nbsp;·&nbsp;&nbsp;DRIFT-LEARNING&nbsp;&nbsp;·&nbsp;&nbsp;INTENT-REORIENT</b>&nbsp;&nbsp;·&nbsp;&nbsp;<span style='color:#bc8cff;letter-spacing:1px'>skills&nbsp;&amp;&nbsp;learning</span></div><div style='color:#6e7681;font-size:11px;font-family:ui-monospace,monospace;letter-spacing:1.2px'>/rank&nbsp;D4&nbsp;PageRank&nbsp;&nbsp;·&nbsp;&nbsp;D5&nbsp;α=0.3&nbsp;posterior&nbsp;(30-day&nbsp;half-life)&nbsp;&nbsp;·&nbsp;&nbsp;/reorient&nbsp;Opus&nbsp;orchestrator</div></div>"]
+        direction LR
+        rank["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D4&nbsp;PAGERANK<br/>utterance&nbsp;DAG<br/><small style='color:#6e7681;letter-spacing:1px'>file-touch&nbsp;edges</small></div>"] --> learn["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D5&nbsp;GAUSS<br/>POSTERIOR<br/><small style='color:#6e7681;letter-spacing:1px'>(intent&nbsp;×&nbsp;developer)</small></div>"] --> reorient["<div style='text-align:center;line-height:1.7;padding:2px 4px'>/reorient<br/>ORCHESTRATOR<br/><small style='color:#6e7681;letter-spacing:1px'>Opus&nbsp;judgment</small></div>"]
+    end
+
+    subgraph Bus["<div style='text-align:center;min-width:940px;line-height:2'><div><span style='font-family:ui-monospace,monospace;color:#8b949e;font-size:11px;letter-spacing:3px'>OUTPUT&nbsp;·&nbsp;ENCHANTED-MCP&nbsp;BUS</span>&nbsp;&nbsp;·&nbsp;&nbsp;<b style='letter-spacing:2px'>djinn.*&nbsp;EVENTS&nbsp;ONLY&nbsp;·&nbsp;HONEST-NUMBERS&nbsp;ENFORCED</b></div><div style='color:#6e7681;font-size:11px;font-family:ui-monospace,monospace;letter-spacing:1.2px'>every&nbsp;drift&nbsp;advisory&nbsp;carries&nbsp;(value,&nbsp;ci_low,&nbsp;ci_high,&nbsp;N)&nbsp;&nbsp;·&nbsp;&nbsp;no&nbsp;N,&nbsp;no&nbsp;advisory</div></div>"]
+        direction LR
+        evt1["<div style='text-align:center;line-height:1.7;padding:2px 4px'>djinn.intent.<br/>captured<br/><small style='color:#6e7681;letter-spacing:1px'>SessionStart</small></div>"] --> evt2["<div style='text-align:center;line-height:1.7;padding:2px 4px'>djinn.drift.<br/>detected<br/><small style='color:#6e7681;letter-spacing:1px'>score&nbsp;&lt;&nbsp;0.7&nbsp;∧&nbsp;N&nbsp;≥&nbsp;5</small></div>"] --> evt3["<div style='text-align:center;line-height:1.7;padding:2px 4px'>djinn.compact.<br/>intent-hint.injected<br/><small style='color:#6e7681;letter-spacing:1px'>PreCompact</small></div>"] --> evt4["<div style='text-align:center;line-height:1.7;padding:2px 4px'>djinn.intent.<br/>refreshed<br/><small style='color:#6e7681;letter-spacing:1px'>UserPromptSubmit</small></div>"]
+    end
+
+    Peers["<div style='text-align:center;min-width:940px;line-height:1.8;padding:6px 10px'><b style='letter-spacing:1.5px;color:#79c0ff'>PEER&nbsp;PLUGINS&nbsp;ENRICH&nbsp;(OPTIONAL)</b><br/><em style='color:#8b949e;font-size:13px;font-weight:400'>Emu → checkpoint.saved (token drift, orthogonal) &nbsp;·&nbsp; Crow → change.classified (per-file trust prior for D4 DAG)</em></div>"]
+
+    Session --> Capture
+    Capture --> Align
+    Align --> Guard
+    Align --> Support
+    Guard --> Bus
+    Support --> Bus
+    Bus --> Peers
+
+    classDef titleBlock fill:#06111f,stroke:#1e3a5f,stroke-width:1px,color:#e6edf3,rx:4,ry:4
+    classDef session fill:#0a1628,stroke:#1e3a5f,stroke-width:1.5px,color:#e6edf3,rx:10,ry:10
+    classDef peers fill:#0f1d33,stroke:#79c0ff,stroke-width:1.5px,color:#79c0ff,rx:8,ry:8
+
+    class TitleBlock titleBlock
+    class Session session
+    class Peers peers
+
+    style Capture fill:#0f1d33,stroke:#58a6ff,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style Align fill:#0f1d33,stroke:#d75952,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style Guard fill:#0f1d33,stroke:#3fb950,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style Support fill:#0f1d33,stroke:#bc8cff,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style Bus fill:#0f1d33,stroke:#d29922,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+
+    linkStyle default stroke:#8b949e,stroke-width:1.5px

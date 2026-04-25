@@ -1,0 +1,60 @@
+---
+title: Djinn session lifecycle
+config:
+  look: neo
+  theme: dark
+  flowchart:
+    curve: basis
+    padding: 18
+    nodeSpacing: 48
+    rankSpacing: 60
+    htmlLabels: true
+    subGraphTitleMargin:
+      top: 14
+      bottom: 18
+---
+flowchart LR
+    TitleBlock["<div style='font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-align:center;min-width:1000px;padding:6px 10px;line-height:1.8'><div style='color:#58a6ff;font-size:15px;letter-spacing:6px;border-bottom:1px solid #1e3a5f;padding-bottom:10px;margin-bottom:10px'>DJINN &nbsp;·&nbsp; SESSION&nbsp;LIFECYCLE</div><div style='display:flex;gap:40px;justify-content:center;font-size:11px;color:#8b949e;letter-spacing:2px'><span>DWG&nbsp;&nbsp;<b style='color:#e6edf3'>DJN-002</b></span><span>REV&nbsp;&nbsp;<b style='color:#e6edf3'>A.1</b></span><span>PHASES&nbsp;&nbsp;<b style='color:#e6edf3'>5&nbsp;hook&nbsp;+&nbsp;2&nbsp;skill</b></span><span>SHEET&nbsp;&nbsp;<b style='color:#e6edf3'>02&nbsp;/&nbsp;03</b></span></div></div>"]
+
+    subgraph P1["<div style='text-align:center;line-height:2;min-width:220px'><b style='letter-spacing:2px'>1&nbsp;·&nbsp;CAPTURE</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>SessionStart&nbsp;&nbsp;·&nbsp;&nbsp;once&nbsp;per&nbsp;session</small></div>"]
+        p1a["<div style='text-align:center;line-height:1.7;padding:2px 4px'>first&nbsp;user&nbsp;prompt<br/><small style='color:#6e7681'>→&nbsp;intent-anchor</small></div>"] --> p1b["<div style='text-align:center;line-height:1.7;padding:2px 4px'>classify<br/>intent_type<br/><small style='color:#6e7681'>feature·bugfix·refactor<br/>research·docs</small></div>"] --> p1c["<div style='text-align:center;line-height:1.7;padding:2px 4px'>atomic&nbsp;write<br/>anchor.json<br/><small style='color:#6e7681'>+&nbsp;sha1&nbsp;hash</small></div>"]
+    end
+
+    subgraph P2["<div style='text-align:center;line-height:2;min-width:220px'><b style='letter-spacing:2px'>2&nbsp;·&nbsp;ALIGN</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>PostToolUse&nbsp;&nbsp;·&nbsp;&nbsp;every&nbsp;turn</small></div>"]
+        p2a["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D1&nbsp;LCS<br/>preservation<br/><small style='color:#6e7681'>vs&nbsp;anchor</small></div>"] --> p2b["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D3&nbsp;reservoir<br/>sample&nbsp;(k=32)<br/><small style='color:#6e7681'>Vitter&nbsp;Algo&nbsp;R</small></div>"] --> p2c["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D2&nbsp;HMM<br/>state&nbsp;label<br/><small style='color:#6e7681'>forward-backward</small></div>"] --> p2d["<div style='text-align:center;line-height:1.7;padding:2px 4px'>bootstrap<br/>95%&nbsp;CI<br/><small style='color:#6e7681'>value,&nbsp;lo,&nbsp;hi,&nbsp;N</small></div>"]
+    end
+
+    subgraph P3["<div style='text-align:center;line-height:2;min-width:220px'><b style='letter-spacing:2px'>3&nbsp;·&nbsp;REFRESH</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>UserPromptSubmit&nbsp;&nbsp;·&nbsp;&nbsp;on&nbsp;new&nbsp;constraint</small></div>"]
+        p3a["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D1&nbsp;ratio<br/>vs&nbsp;anchor<br/><small style='color:#6e7681'>&lt;&nbsp;0.5&nbsp;→&nbsp;refresh</small></div>"] --> p3b["<div style='text-align:center;line-height:1.7;padding:2px 4px'>append<br/>refresh_delta<br/><small style='color:#6e7681'>never&nbsp;replaces</small></div>"]
+    end
+
+    subgraph P4["<div style='text-align:center;line-height:2;min-width:220px'><b style='letter-spacing:2px'>4&nbsp;·&nbsp;GUARD</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>PreCompact&nbsp;&nbsp;·&nbsp;&nbsp;structural&nbsp;injection</small></div>"]
+        p4a["<div style='text-align:center;line-height:1.7;padding:2px 4px'>read&nbsp;anchor<br/>+&nbsp;deltas<br/><small style='color:#6e7681'>out-of-context</small></div>"] --> p4b["<div style='text-align:center;line-height:1.7;padding:2px 4px'>stdout&nbsp;hint<br/>BEFORE&nbsp;compactor<br/><small style='color:#6e7681'>survival&nbsp;guaranteed</small></div>"]
+    end
+
+    subgraph P5["<div style='text-align:center;line-height:2;min-width:220px'><b style='letter-spacing:2px'>5&nbsp;·&nbsp;LEARN</b><br/><small style='color:#6e7681;font-family:ui-monospace,monospace;letter-spacing:1.2px'>PreCompact&nbsp;&nbsp;·&nbsp;&nbsp;cross-session&nbsp;posterior</small></div>"]
+        p5a["<div style='text-align:center;line-height:1.7;padding:2px 4px'>derive&nbsp;summary<br/>(intent,&nbsp;dev,&nbsp;N,&nbsp;μ)<br/><small style='color:#6e7681'>from&nbsp;reservoir</small></div>"] --> p5b["<div style='text-align:center;line-height:1.7;padding:2px 4px'>D5&nbsp;EMA<br/>update&nbsp;posterior<br/><small style='color:#6e7681'>α=0.3&nbsp;·&nbsp;30-day</small></div>"]
+    end
+
+    SkillBox["<div style='text-align:center;min-width:500px;line-height:1.8;padding:6px 10px'><b style='letter-spacing:1.5px;color:#bc8cff'>DEVELOPER-INVOKED&nbsp;SKILLS</b><br/><em style='color:#8b949e;font-size:13px;font-weight:400'>/rank&nbsp;→&nbsp;D4&nbsp;PageRank&nbsp;audit&nbsp;&nbsp;·&nbsp;&nbsp;/reorient&nbsp;→&nbsp;manual&nbsp;anchor&nbsp;re-pin&nbsp;(Opus)</em></div>"]
+
+    P1 --> P2
+    P2 --> P3
+    P3 --> P2
+    P2 --> P4
+    P4 --> P5
+    P5 --> SkillBox
+
+    classDef titleBlock fill:#06111f,stroke:#1e3a5f,stroke-width:1px,color:#e6edf3,rx:4,ry:4
+    classDef skillbox fill:#0a1628,stroke:#bc8cff,stroke-width:1.5px,color:#e6edf3,rx:10,ry:10
+
+    class TitleBlock titleBlock
+    class SkillBox skillbox
+
+    style P1 fill:#0f1d33,stroke:#58a6ff,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style P2 fill:#0f1d33,stroke:#d75952,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style P3 fill:#0f1d33,stroke:#58a6ff,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style P4 fill:#0f1d33,stroke:#3fb950,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+    style P5 fill:#0f1d33,stroke:#bc8cff,stroke-width:2px,color:#e6edf3,rx:12,ry:12
+
+    linkStyle default stroke:#8b949e,stroke-width:1.5px
