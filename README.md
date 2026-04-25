@@ -232,7 +232,7 @@ Optional subscriptions (Phase-2 enrichment): `emu.checkpoint.saved`, `crow.chang
 
 ## Roadmap
 
-Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](https://github.com/enchanted-plugins/wixie/blob/main/docs/ecosystem.md). For upcoming work specific to Djinn, see issues tagged [roadmap](https://github.com/enchanted-plugins/djinn/labels/roadmap).
+Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](docs/ecosystem.md). For upcoming work specific to Djinn, see issues tagged [roadmap](https://github.com/enchanted-plugins/djinn/labels/roadmap).
 
 ## The Science Behind Djinn
 
