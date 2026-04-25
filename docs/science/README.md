@@ -15,13 +15,13 @@ Given the anchor token sequence A = ⟨a₁, ..., aₘ⟩ and current-turn token
 
 The preservation ratio is:
 
-```
-ratio = 2·|LCS(A, C)| / (|A| + |C|)
-```
+<p align="center"><img src="../assets/math/d1-ratio.svg" alt="ratio(A, C) = 2·|LCS(A, C)| / (|A| + |C|) ∈ [0, 1]"></p>
 
 This is the Ratcliff-Obershelp measure over LCS. It lies in [0, 1]; 1.0 = A ≡ C, 0 = no shared tokens.
 
 ### Decision rule
+
+<p align="center"><img src="../assets/math/d1-decision.svg" alt="state(t) = ON_TASK if ratio_t >= 0.7; SIDEQUEST if 0.4 <= ratio_t < 0.7; LOST if ratio_t < 0.4"></p>
 
 - `ratio ≥ 0.7` → ON_TASK for this turn.
 - `0.4 ≤ ratio < 0.7` → SIDEQUEST (possible drift, feed to D2 HMM).
@@ -51,6 +51,12 @@ Normalization (`normalize()`): lowercase, `\w+` tokenize, drop 12-word stopword 
 A 3-state HMM over hidden states S = {ON_TASK, SIDEQUEST, LOST} emits observations oₜ = (tool_name, topic_tag) at each turn. Baum-Welch is the EM algorithm for HMMs: the forward-backward pass computes posterior state probabilities γₜ(i) = P(sₜ = i | O, λ), and the M-step re-estimates the transition matrix A, emission matrix B, and initial distribution π.
 
 For Djinn, we run one forward-backward pass with informed priors, re-estimate B only (transitions and priors are fixed by domain knowledge), then one more forward-backward pass with refined B. Full EM convergence is unnecessary per-turn — posterior state labels are what we need.
+
+<p align="center"><img src="../assets/math/d2-forward.svg" alt="Forward recursion: alpha_t(j) = [sum_i alpha_(t-1)(i) * a_ij] * b_j(o_t)"></p>
+
+<p align="center"><img src="../assets/math/d2-gamma.svg" alt="Posterior state probability: gamma_t(i) = alpha_t(i) * beta_t(i) / sum_j alpha_t(j) * beta_t(j)"></p>
+
+<p align="center"><img src="../assets/math/d2-label.svg" alt="State label: argmax over {ON_TASK, SIDEQUEST, LOST} of gamma_t(i)"></p>
 
 Priors: π = (0.8, 0.15, 0.05), A = [[0.80, 0.15, 0.05], [0.30, 0.60, 0.10], [0.10, 0.20, 0.70]]. Strong self-transition on LOST reflects the observation that once an agent is truly off-task, recovery within ≤ 5 turns is rare.
 
@@ -83,6 +89,10 @@ Algorithm R maintains a uniform random sample of size k from an input stream of 
 
 Invariant: after processing N items, each item in the stream has probability exactly k/N of being in the final reservoir.
 
+<p align="center"><img src="../assets/math/d3-reservoir.svg" alt="Pr[x_i in R_n] = k/n for all i in {1,...,n}, n >= k"></p>
+
+<p align="center"><img src="../assets/math/d3-step.svg" alt="R_{n+1} = R_n union {x_{n+1}} if n < k; R_n[j <- x_{n+1}] if j ~ U(0,n] and j < k; R_n otherwise"></p>
+
 ### Decision rule
 
 k = 32. A 32-sample reservoir provides enough data for a meaningful bootstrap CI while capping per-session memory at O(1). Minimum N for bootstrap is 5; below that the honest-numbers contract returns `insufficient_data`.
@@ -107,13 +117,13 @@ Stdlib `random.randint(0, n_seen - 1)` (inclusive on both ends) plus a list slot
 
 PageRank computes a stationary distribution over a graph via iterative relaxation:
 
-```
-PR(p) = (1-d)/N + d · Σ_{q → p} PR(q) / L(q)
-```
+<p align="center"><img src="../assets/math/d4-pagerank.svg" alt="PR(p) = (1-d)/N + d * sum_{q -> p} PR(q)/L(q), d = 0.85"></p>
 
 where d = 0.85 is the damping factor and L(q) is the out-degree of q. Dangling nodes (no out-edges) redistribute mass uniformly — the standard Brin-Page treatment.
 
-For Djinn, nodes are agent utterances (turn records) and directed edges connect utterances that touched the same file path in `tool_input` / `tool_response`. The intuition: a "conversational" turn that merely restated the goal without touching artifacts will have no in-edges and will end up near the teleport floor, while a turn that shaped a file many later turns also touched will score high.
+For Djinn, nodes are agent utterances (turn records) and directed edges connect utterances that touched the same file path in `tool_input` / `tool_response`:
+
+<p align="center"><img src="../assets/math/d4-edges.svg" alt="(u, v) in E iff files(u) intersect files(v) is nonempty"></p> The intuition: a "conversational" turn that merely restated the goal without touching artifacts will have no in-edges and will end up near the teleport floor, while a turn that shaped a file many later turns also touched will score high.
 
 ### Decision rule
 
@@ -139,12 +149,11 @@ Sparse power-iteration over a `dict[str, list[str]]` adjacency. Hard cap at 100 
 
 A per-(intent-type, developer) posterior P over drift-signature features:
 
-```
-mean_new    = (1 - α) · mean_prev + α · obs_score
-var_new     = (1 - α) · var_prev  + α · (obs_score - mean_new)²
-p10_new     = mean_new - 1.2816 · sqrt(var_new)
-n_sessions += 1
-```
+<p align="center"><img src="../assets/math/d5-ema-mean.svg" alt="mu_{n+1} = (1 - alpha) * mu_n + alpha * y_session, alpha = 0.3"></p>
+
+<p align="center"><img src="../assets/math/d5-ema-variance.svg" alt="sigma^2_{n+1} = (1 - alpha) * sigma^2_n + alpha * (y_session - mu_{n+1})^2"></p>
+
+<p align="center"><img src="../assets/math/d5-p10.svg" alt="p10_threshold = mu - 1.2816 * sigma"></p>
 
 α = 0.3 corresponds to a ~30-day EMA half-life when sessions occur roughly daily. The posterior captures the developer's calibrated "acceptable drift" envelope per intent type: a research session earns a wider tolerated band than a bugfix session.
 

@@ -1,43 +1,42 @@
 # docs/assets — rendered diagrams & equations
 
-Pre-rendered SVGs so GitHub's mobile app (which renders neither
-` ```mermaid ` blocks nor `$$...$$` math) shows them correctly. The
-root `README.md` references the files here as `<img>`.
+These SVGs are **pre-rendered** so GitHub's mobile app (which renders neither
+` ```mermaid ` blocks nor `$$...$$` math) shows them correctly. `README.md` and
+`docs/science/README.md` reference the files here as `<img>`.
 
-## Template note
-
-Schematic is the **canonical template** for every sibling plugin in
-the enchanted-plugins ecosystem. This folder ships as a scaffold:
-the rendering toolchain configs (`mermaid.config.json`,
-`puppeteer.config.json`, `apply-blueprint.js`, `render-math.js`,
-`package.json`) are committed; no SVGs are rendered here because
-the template itself is never installed or displayed.
-
-When you clone this template to start a new sibling:
-
-1. Populate the sub-plugins under `plugins/`.
-2. Run `python docs/architecture/generate.py` to generate the `.mmd`
-   sources under `docs/architecture/`.
-3. Run the render commands below to produce the `.svg` files here.
-4. Commit the `.mmd` and `.svg` together.
-
-## Files (after first generate)
+## Files
 
 | File | Source | Regenerate |
 |------|--------|-----------|
-| `highlevel.svg` | `../architecture/highlevel.mmd` | `npx @mermaid-js/mermaid-cli -i ../architecture/highlevel.mmd -o highlevel.svg -c mermaid.config.json -p puppeteer.config.json -b "#0a1628" -w 1800 && node apply-blueprint.js highlevel.svg` |
-| `hooks.svg` | `../architecture/hooks.mmd` | `npx @mermaid-js/mermaid-cli -i ../architecture/hooks.mmd -o hooks.svg -c mermaid.config.json -p puppeteer.config.json -b "#0a1628" -w 1800 && node apply-blueprint.js hooks.svg` |
-| `lifecycle.svg` | `../architecture/lifecycle.mmd` | `npx @mermaid-js/mermaid-cli -i ../architecture/lifecycle.mmd -o lifecycle.svg -c mermaid.config.json -p puppeteer.config.json -b "#0a1628" -w 1800 && node apply-blueprint.js lifecycle.svg` |
-| `dataflow.svg` | `../architecture/dataflow.mmd` | `npx @mermaid-js/mermaid-cli -i ../architecture/dataflow.mmd -o dataflow.svg -c mermaid.config.json -p puppeteer.config.json -b "#0a1628" -w 1800 && node apply-blueprint.js dataflow.svg` |
+| `pipeline.svg` | `pipeline.mmd` | `npx -y @mermaid-js/mermaid-cli -i pipeline.mmd -o pipeline.svg -c mermaid.config.json -p puppeteer.config.json -b "#0a1628" -w 1800 && node apply-blueprint.js pipeline.svg` |
+| `lifecycle.svg` | `lifecycle.mmd` | `npx -y @mermaid-js/mermaid-cli -i lifecycle.mmd -o lifecycle.svg -c mermaid.config.json -p puppeteer.config.json -b "#0a1628" -w 1800 && node apply-blueprint.js lifecycle.svg` |
+| `state-flow.svg` | `state-flow.mmd` | `npx -y @mermaid-js/mermaid-cli -i state-flow.mmd -o state-flow.svg -c mermaid.config.json -p puppeteer.config.json -b "#0a1628" -w 1800 && node apply-blueprint.js state-flow.svg` |
 | `math/*.svg` | `render-math.js` | `npm install --prefix . mathjax-full && node render-math.js` |
 
-Run the commands from `docs/assets/` (paths are relative). The
-toolchain (`node_modules/`, `package-lock.json`) is gitignored; only
-the rendered SVGs, their `.mmd` sources, and the configs committed
-above are tracked.
+The `apply-blueprint.js` step overlays an engineering-blueprint grid (navy `#0a1628` paper, `#1e3a5f` major lines / `#16304f` minor lines) onto the rendered diagram so it reads as a CAD drawing rather than a neutral dark card. Matches the look of the sibling repos (emu, wixie, crow, hydra, sylph, lich, pech).
 
-The `apply-blueprint.js` step overlays an engineering-blueprint grid
-(navy `#0a1628` paper, `#1e3a5f` major lines / `#16304f` minor lines)
-onto the rendered diagram so it reads as a CAD drawing rather than a
-neutral dark card. This is the shared visual identity across every
-sibling repo (emu, wixie, crow, pech, hydra, sylph).
+Run the commands from `docs/assets/` (paths are relative). The toolchain
+(`node_modules/`, `package-lock.json`) is gitignored; only the rendered SVGs
+and source `.mmd` / `.js` files are committed.
+
+## Equations rendered
+
+The 14 equations cover every Djinn engine plus the honest-numbers contract:
+
+| ID | File | Coverage |
+|----|------|----------|
+| D1 | `math/d1-ratio.svg`, `math/d1-decision.svg` | Hunt-Szymanski LCS ratio + ON_TASK / SIDEQUEST / LOST decision rule |
+| D2 | `math/d2-forward.svg`, `math/d2-gamma.svg`, `math/d2-label.svg` | Baum-Welch forward recursion + posterior + state label |
+| D3 | `math/d3-reservoir.svg`, `math/d3-step.svg` | Vitter Algorithm R uniform-sample invariant + step rule |
+| D4 | `math/d4-pagerank.svg`, `math/d4-edges.svg` | PageRank stationary + file-touch DAG edges |
+| D5 | `math/d5-ema-mean.svg`, `math/d5-ema-variance.svg`, `math/d5-p10.svg` | EMA mean + variance + p10 threshold |
+| Contract | `math/honest-tuple.svg`, `math/honest-bootstrap.svg` | Honest-numbers tuple shape + bootstrap percentile interval |
+
+## Relationship to docs/architecture/
+
+Two diagram surfaces exist in this repo:
+
+- **`docs/assets/{pipeline,lifecycle,state-flow}.svg`** — hand-authored blueprint diagrams referenced by the root `README.md`. Shape is designed for narrative clarity (the README reader).
+- **`docs/architecture/{highlevel,hooks,lifecycle,dataflow}.mmd`** — auto-generated from `plugins/*/.claude-plugin/plugin.json` + `hooks/hooks.json` + `SKILL.md` frontmatter by `docs/architecture/generate.py`. Shape follows the code; regenerates on every source change.
+
+Both are blueprint-styled but serve different audiences. The `docs/assets/` set is for the GitHub landing page; the `docs/architecture/` set is for developers browsing the code.

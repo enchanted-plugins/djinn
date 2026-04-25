@@ -62,6 +62,20 @@ Not for:
 
 Djinn runs a five-engine pipeline that treats intent preservation as *out-of-context anchoring → deterministic per-turn scoring → structurally-guaranteed compaction survival → cross-session Bayesian calibration*. The premise: every production approach to LLM intent preservation has a documented failure mode, and each one shares a common shape — putting the anchor in-context or asking the agent to self-report.
 
+<p align="center">
+  <a href="docs/assets/pipeline.mmd" title="View pipeline source (Mermaid)">
+    <img src="docs/assets/pipeline.svg"
+         alt="Djinn six-subplugin architecture blueprint — Claude Code session input flowing through intent-anchor (D1+D3 first-turn capture and constraint-delta refresh), drift-aligner (D1+D2+D3 per-turn alignment with bootstrap CI), compact-guard (D1 PreCompact structural injection), then utterance-rank + drift-learning + intent-reorient (/rank D4 PageRank, D5 Gauss posterior, /reorient Opus orchestrator), publishing four djinn.* events on the enchanted-mcp bus with optional peer-plugin enrichment from Emu and Crow"
+         width="100%" style="max-width: 1100px;">
+  </a>
+</p>
+
+<sub align="center">
+
+Source: [docs/assets/pipeline.mmd](docs/assets/pipeline.mmd) · Regeneration command in [docs/assets/README.md](docs/assets/README.md).
+
+</sub>
+
 1. **Anchor lives out-of-context.** `intent-anchor` writes the first-turn goal to `state/anchor.json` on SessionStart. It is never re-echoed into the prompt mid-session; mid-context repetition lives in the recall valley (Liu et al. "Lost in the Middle", NAACL 2024) and buys zero recall.
 2. **Deterministic per-turn measurement.** `drift-aligner` runs D1 Hunt-Szymanski LCS + D2 Baum-Welch HMM + D3 Vitter reservoir on every `PostToolUse`. No LLM judgment is in the measurement path. A drifted agent confidently self-reports as on-task (Shinn et al. Reflexion 2023); deterministic compute is the only honest signal.
 3. **Structural compaction survival.** `compact-guard` injects the anchor as a hint **before** the compaction model runs. Survival is not up to the compactor's recency bias — it is structurally guaranteed by the hook lifecycle.
@@ -86,6 +100,10 @@ LlamaIndex / LangChain vector-RAG over history retrieves *similar* turns, which 
 
 Every drift advisory carries `(preservation_score, ci_low, ci_high, N)` from a 1000-iteration bootstrap. If `N < 5`, `orchestrator` returns `insufficient_data` and refuses to fabricate a band. No score inflation at session boundaries, no "it should work" reporting.
 
+<p align="center"><img src="docs/assets/math/honest-tuple.svg" alt="advisory = (value, ci_low, ci_high, N), N >= 5"></p>
+
+<p align="center"><img src="docs/assets/math/honest-bootstrap.svg" alt="ci_95% = [Q_0.025({y_b}), Q_0.975({y_b})] over B = 1000 bootstrap resamples"></p>
+
 ### Orthogonal to Emu, not overlapping
 
 Emu measures *token economy* drift (A1 Markov on tool patterns — read-loops, edit-reverts). Djinn measures *semantic intent* drift (D1 LCS on goal-tokens). A session can have a green Markov state and ample token runway while having silently redirected to a task the user never asked for. The two signals are orthogonal; subscribing to `emu.checkpoint.saved` enriches Djinn's signal but does not replace it.
@@ -93,6 +111,20 @@ Emu measures *token economy* drift (A1 Markov on tool patterns — read-loops, e
 ## The Full Lifecycle
 
 A session flows top-to-bottom through four hook phases plus two developer-invoked skills.
+
+<p align="center">
+  <a href="docs/assets/lifecycle.mmd" title="View lifecycle source (Mermaid)">
+    <img src="docs/assets/lifecycle.svg"
+         alt="Djinn session lifecycle blueprint — five phases: 1 CAPTURE (SessionStart, classify intent_type, atomic write anchor.json), 2 ALIGN (PostToolUse D1 LCS, D3 reservoir, D2 HMM, bootstrap 95% CI), 3 REFRESH (UserPromptSubmit D1 ratio test, append refresh_delta), 4 GUARD (PreCompact stdout hint before compactor), 5 LEARN (PreCompact D5 EMA posterior update); plus developer-invoked /rank PageRank audit and /reorient Opus orchestrator manual re-pin"
+         width="100%" style="max-width: 1100px;">
+  </a>
+</p>
+
+<sub align="center">
+
+Source: [docs/assets/lifecycle.mmd](docs/assets/lifecycle.mmd) · Regeneration command in [docs/assets/README.md](docs/assets/README.md).
+
+</sub>
 
 | Phase | Event | Sub-plugin | Engines | Output |
 |-------|-------|------------|---------|--------|
@@ -155,6 +187,20 @@ Slash commands:
 ## What You Get Per Session
 
 Every PostToolUse feeds three state files (reservoir, states log, posterior book); PreCompact folds a session summary into the cross-session posterior. All writes go through the atomic `shared/scripts/state_io.atomic_write_json` helper.
+
+<p align="center">
+  <a href="docs/assets/state-flow.mmd" title="View state-flow source (Mermaid)">
+    <img src="docs/assets/state-flow.svg"
+         alt="Djinn per-session state flow: Claude Code hooks (SessionStart, UserPromptSubmit, PostToolUse, PreCompact) feed four color-coded journals (intent-anchor anchor.json, drift-aligner reservoir.json + states.jsonl, drift-learning posteriors.json + learnings.jsonl, utterance-rank last-rank.json), which converge on the enchanted-mcp bus (4 published djinn.* events plus 2 optional subscriptions from emu and crow) and the developer query surface (stderr advisory plus /rank and /reorient skills)"
+         width="100%" style="max-width: 1100px;">
+  </a>
+</p>
+
+<sub align="center">
+
+Source: [docs/assets/state-flow.mmd](docs/assets/state-flow.mmd) · Regeneration command in [docs/assets/README.md](docs/assets/README.md).
+
+</sub>
 
 ```
 plugins/intent-anchor/state/
