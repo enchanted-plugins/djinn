@@ -101,17 +101,19 @@ Add 5 more plugins covering code quality, testing, DevOps, documentation, and AP
 
 | # | Plugin | Question | Algorithm | Category |
 |---|--------|----------|-----------|----------|
-| 6 | **Athena** | Is this code good? | AST Diff + Weighted Decision Trees | Code review |
+| 6 | **Lich** | Is this code good? | Cousot Interval + Falleri Structural Diff + Zheng Pairwise | Code review |
 | 7 | **Crucible** | Do the tests catch bugs? | Genetic Mutation Testing | Testing/QA |
 | 8 | **Assembler** | Can this deploy? | Critical Path DAG Optimization | DevOps/CI |
 | 9 | **Scribe** | Is the docs up to date? | TF-IDF Extractive Summarization | Documentation |
 | 10 | **Schema** | Is the API contract valid? | Semantic Version Diffing | API design |
 
+> **Retired:** Athena (originally planned for slot #6) was retired before implementation. Lich replaces it with a more rigorous algorithm stack (Cousot Interval Analysis + Falleri Structural Diff + Zheng Pairwise Comparison) that provides static-analysis-grade code review rather than heuristic AST diff alone.
+
 ### Milestone: 10 plugins + enhanced MCP
 - All 10 plugins connected to enchanted-mcp
 - Dashboard shows full development lifecycle
 - Cross-plugin intelligence covers: prompt → code → test → security → deploy → docs
-- Plugin-to-plugin event triggers (Crow flags change → Athena auto-reviews → Crucible tests)
+- Plugin-to-plugin event triggers (Crow flags change → Lich auto-reviews → Crucible tests)
 
 ---
 
@@ -169,15 +171,15 @@ Every plugin is named after a game entity that metaphorically describes its func
 
 | Plugin | Entity | Game | Why |
 |--------|--------|------|-----|
-| **Wixie** | Wixie | Ars Nouveau | A cauldron-summoned familiar that iterates ingredients until the brew carries the right properties — enchanting prompts |
-| **Emu** | Emu | Alex's Mobs | A flightless bird with long-range vision that spots threats on the horizon before they arrive — token horizon watching |
-| **Crow** | Crow | Alex's Mobs | A sharp-eyed corvid that inspects every object, remembers faces, and sorts friend from threat — change observation |
-| **Hydra** | Hydra | Twilight Forest | A multi-headed boss whose heads regenerate faster than they can be severed — suppress one surface, two more emerge — security scanning |
-| **Pech** | Pech | Thaumcraft | Short hooded hoarders that track every item they carry — cost accounting |
+| **Wixie** | Enchantment Orbs | Minecraft | XP orbs that power the enchantment table — enchanting prompts |
+| **Emu** | Emu Mob | Minecraft | Flying creature that collects items and brings them to you — collecting tokens |
+| **Crow** | Crow | Hollow Knight | Ravenant protector who watches, tests, and judges from the shadows — watching changes |
+| **Hydra** | Hydra Leviathan | Subnautica | You hear it before you see it. Hunts in the dark. Relentless. Nothing gets past it — security scanning |
+| **Pech** | Tom Pech | Animal Crossing | Merchant-banker who tracks every bell you owe — cost accounting |
 | **Athena** | Athena | Hades | Goddess of wisdom who judges your combat quality and grants boons for excellence — code review |
 | **Crucible** | Crucible | Terraria | Endgame crafting station forged in hellfire — tests things to destruction — mutation testing |
 | **Assembler** | Assembling Machine | Factorio | Takes parts in, produces artifacts out, chains into automated pipelines — CI/CD building |
-| **Sylph** | Sylph | Ars Nouveau | A wind elemental that threads air currents between distant points, stitching the landscape together — weaving branches, commits, and PRs into one history |
+| **Sylph** | Sylphs | Hollow Knight | Silk-spinners and Crow's ancestral kin who weave threads into coherent patterns — weaving branches, commits, and PRs into one history |
 
 ## Brand Standard (All Plugins)
 
@@ -211,14 +213,20 @@ Every named algorithm across the ecosystem:
 | A3 | Shannon Compression | Emu | Information-theoretic output reduction |
 | A4 | Atomic State Serialization | Emu | Bounded checkpoint persistence |
 | A5 | Content-Addressable Dedup | Emu | Hash-based read deduplication |
-| V1 | Semantic Diff Compression | Crow | Multi-file change clustering |
-| V2 | Bayesian Trust Scoring | Crow | Prior-posterior change risk assessment |
-| V3 | Information-Gain Decision | Crow | Review prioritization by uncertainty reduction |
-| V4 | Session Continuity Graph | Crow | Decision-causal relationship persistence |
-| V5 | Adversarial Self-Review | Crow | Specific concern generation for risky changes |
-| V6 | Gauss Learning (Crow) | Crow | Developer preference accumulation |
-| S1 | Aho-Corasick Pattern | Hydra | Multi-pattern secret scanning |
-| S2 | Shannon Entropy Analysis | Hydra | High-entropy string detection |
+| H1 | Semantic Diff Compression | Crow | Multi-file change clustering |
+| H2 | Bayesian Trust Scoring | Crow | Prior-posterior change risk assessment |
+| H3 | Information-Gain Decision | Crow | Review prioritization by uncertainty reduction |
+| H4 | Session Continuity Graph | Crow | Decision-causal relationship persistence |
+| H5 | Adversarial Self-Review | Crow | Specific concern generation for risky changes |
+| H6 | Gauss Learning (Crow) | Crow | Developer preference accumulation |
+| R1 | Aho-Corasick Pattern | Hydra | Multi-pattern secret scanning |
+| R2 | Shannon Entropy Analysis | Hydra | High-entropy string detection |
+| R3 | OWASP Vulnerability Graph | Hydra | Vulnerability pattern detection |
+| R4 | Markov Action Classification | Hydra | Dangerous command classification |
+| R5 | Config Poisoning Detection | Hydra | Malicious config interception at SessionStart |
+| R6 | Phantom Dependency Detection | Hydra | Slopsquatting / dependency confusion detection |
+| R7 | Subcommand Overflow | Hydra | Subcommand injection and overflow detection |
+| R8 | EMA Posture Decay | Hydra | Cross-hook EMA threat-rate decay (α=0.3; Roberts 1959) |
 | L1 | Exponential Smoothing | Pech | Cost forecasting |
 | L2 | Budget Boundary Detection | Pech | Spend threshold alerting |
 | W1 | Myers-Diff Conventional Classifier | Sylph | Diff-to-Conventional-Commits classification |
