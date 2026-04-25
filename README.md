@@ -232,15 +232,7 @@ Optional subscriptions (Phase-2 enrichment): `emu.checkpoint.saved`, `crow.chang
 
 ## Roadmap
 
-| Phase | Status | Scope |
-|-------|--------|-------|
-| Phase 1 — scaffold | 🟢 shipped | 5 engines, 7 plugins, 4 hook bindings, 3 agents, honest-numbers advisories, 22 unit tests |
-| Phase 2 — subscriptions | 🟡 planned | Wire `emu.checkpoint.saved` + `crow.change.classified` subscribers; enrich the D4 DAG with per-file classification confidence as edge prior |
-| Phase 3 — rendered reports | 🟡 planned | Dark-themed PDF report from `docs/architecture/generate.py` + mermaid diagrams; ship per release tag |
-| Phase 4 — posterior backtests | 🟡 planned | Backtest harness for D5 posteriors across `learnings.jsonl`; surface p10 threshold miscalibrations |
-| Phase 5 — full orchestrator | 🟡 planned | Ship orchestrator composite-score logic alongside the agent contract; hook-path advisory upgrade from raw D1 to posterior-derived p10 |
-
-See [docs/ROADMAP.md](docs/ROADMAP.md) for the cross-sibling phase map.
+Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](https://github.com/enchanted-plugins/wixie/blob/main/docs/ecosystem.md). For upcoming work specific to Djinn, see issues tagged [roadmap](https://github.com/enchanted-plugins/djinn/labels/roadmap).
 
 ## The Science Behind Djinn
 
