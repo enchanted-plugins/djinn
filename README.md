@@ -19,6 +19,12 @@ Pins the original session intent, watches for long-horizon drift across `/compac
 >
 > Time: structurally guaranteed, zero per-turn LLM calls on the critical path. Developer effort: read one advisory.
 
+## TL;DR
+
+**In plain English:** Long Claude Code sessions quietly drift away from what you originally asked for — especially after a compaction — and by the time you notice, the agent has confidently built the wrong thing.
+
+**Technically:** D1 Hunt-Szymanski LCS captures first-turn intent as a token-anchor persisted to `state/anchor.json`; D2 Baum-Welch HMM labels each subsequent turn ON_TASK / SIDEQUEST / LOST against that anchor; D3 Vitter reservoir keeps a bounded k=32 sample for D4 PageRank ranking and D5 Gauss posterior calibration. Every advisory carries `(preservation_score, ci_low, ci_high, N)` from a 1000-iteration non-parametric bootstrap — no N means no advisory.
+
 ---
 
 ## Origin
