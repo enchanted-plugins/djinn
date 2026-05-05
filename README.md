@@ -13,7 +13,7 @@
   <a href="https://www.repostatus.org/#wip"><img alt="Project Status: WIP" src="https://www.repostatus.org/badges/latest/wip.svg"></a>
 </p>
 
-> **An @enchanted-plugins product — algorithm-driven, agent-managed, self-learning.**
+> **An @enchanter-ai product — algorithm-driven, agent-managed, self-learning.**
 
 Pins the original session intent, watches for long-horizon drift across `/compact`, and reasserts the goal when the agent diverges.
 
@@ -155,7 +155,7 @@ Djinn ships as a 7-plugin marketplace (6 sub-plugins + 1 meta). The `full` meta-
 **In Claude Code** (recommended):
 
 ```
-/plugin marketplace add enchanted-plugins/djinn
+/plugin marketplace add enchanter-ai/djinn
 /plugin install full@djinn
 ```
 
@@ -242,7 +242,7 @@ Optional subscriptions (Phase-2 enrichment): `emu.checkpoint.saved`, `crow.chang
 
 ## Roadmap
 
-Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](docs/ecosystem.md). For upcoming work specific to Djinn, see issues tagged [roadmap](https://github.com/enchanted-plugins/djinn/labels/roadmap).
+Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](docs/ecosystem.md). For upcoming work specific to Djinn, see issues tagged [roadmap](https://github.com/enchanter-ai/djinn/labels/roadmap).
 
 ## The Science Behind Djinn
 
@@ -273,7 +273,7 @@ Full derivations live in [docs/science/README.md](docs/science/README.md). Each 
 
 ## Agent Conduct (12 Modules)
 
-Twelve behavioral modules live in [`shared/conduct/`](shared/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanted-plugins/schematic) canonical template and not edited by Djinn.
+Twelve behavioral modules live in [`shared/conduct/`](shared/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanter-ai/schematic) canonical template and not edited by Djinn.
 
 | Module | Covers |
 |--------|--------|
@@ -306,7 +306,7 @@ Interactive architecture explorer with sub-plugin diagrams, agent cards, and hoo
 - **Liu et al.** — "Lost in the Middle" (NAACL 2024) — documented the recall valley that justifies the out-of-context anchor design.
 - **Shinn et al.** — Reflexion (2023) — documented why solo self-critique on drift is near-chance without external evaluators.
 - **BaileyHoll** — Ars Nouveau (2020) — the Minecraft mod whose Djinn familiar gave this plugin its name and its metaphor.
-- **@enchanted-plugins** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech — for the canonical template, the event-bus pattern, and the ecosystem contract.
+- **@enchanter-ai** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech — for the canonical template, the event-bus pattern, and the ecosystem contract.
 
 ## Versioning & release cadence
 
@@ -316,7 +316,7 @@ Djinn follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Breaki
 
 Pull requests welcome — read [CONTRIBUTING.md](CONTRIBUTING.md) first. Key rules:
 
-- Do not edit `shared/conduct/*.md` in a Djinn PR; raise the change in the [schematic](https://github.com/enchanted-plugins/schematic) repo.
+- Do not edit `shared/conduct/*.md` in a Djinn PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo.
 - Every new engine needs an Author-Year docstring citation and a `docs/science/README.md` section.
 - Every hook script opens with the subagent-loop guard and exits 0 fail-open.
 - Honest-numbers contract on every advisory: no N, no advisory.
@@ -328,9 +328,9 @@ See [CITATION.cff](CITATION.cff) for machine-readable citation metadata.
 ```
 @software{djinn_2026,
   title   = {Djinn: Anchor-bound intent preservation for long-horizon Claude Code sessions},
-  author  = {{enchanted-plugins}},
+  author  = {{enchanter-ai}},
   year    = {2026},
-  url     = {https://github.com/enchanted-plugins/djinn},
+  url     = {https://github.com/enchanter-ai/djinn},
   license = {MIT}
 }
 ```

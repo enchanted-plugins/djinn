@@ -3,7 +3,7 @@
   "description": "Developer-facing skill for manual re-pinning of the session intent mid-session. Invoked via /reorient when the developer wants to override the captured anchor with a new goal. Also hosts the orchestrator Opus-tier judgment agent.",
   "version": "0.1.0",
   "author": {
-    "name": "enchanted-plugins"
+    "name": "enchanter-ai"
   },
   "license": "MIT",
   "keywords": [

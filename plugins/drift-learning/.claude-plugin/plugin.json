@@ -3,7 +3,7 @@
   "description": "Per-(intent-type × developer) drift-signature posterior persisted via D5 Gauss Accumulation. PreCompact hook captures session summary statistics into the posterior with 30-day EMA half-life. Lets a 'research' session earn a wider tolerated drift band than a 'bugfix' session.",
   "version": "0.1.0",
   "author": {
-    "name": "enchanted-plugins"
+    "name": "enchanter-ai"
   },
   "license": "MIT",
   "keywords": [

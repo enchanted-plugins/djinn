@@ -7,7 +7,7 @@ A guided first session. Assumes Claude Code is installed and authenticated.
 In Claude Code:
 
 ```
-/plugin marketplace add enchanted-plugins/djinn
+/plugin marketplace add enchanter-ai/djinn
 /plugin install full@djinn
 ```
 

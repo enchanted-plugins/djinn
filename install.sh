@@ -4,7 +4,7 @@
 # Zero external runtime deps: requires git + python3 (stdlib only).
 set -euo pipefail
 
-REPO="https://github.com/enchanted-plugins/djinn"
+REPO="https://github.com/enchanter-ai/djinn"
 PLUGIN_HOME_DIR="${PLUGIN_HOME_DIR:-$HOME/.claude/plugins/djinn}"
 
 step() { printf "\n\033[1;36m▸ %s\033[0m\n" "$*"; }
@@ -43,7 +43,7 @@ cat <<'EOF'
 
   Finish in Claude Code with TWO commands:
 
-    /plugin marketplace add enchanted-plugins/djinn
+    /plugin marketplace add enchanter-ai/djinn
     /plugin install full@djinn
 
   That installs every sub-plugin via dependency resolution. To cherry-pick

@@ -25,5 +25,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Ten shared behavioral modules inherited verbatim from schematic.
 - 22 stdlib-only unit tests (engines + hooks shape + plugin.json + subagent guard).
 
-[Unreleased]: https://github.com/enchanted-plugins/djinn/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/enchanted-plugins/djinn/releases/tag/v0.1.0
+[Unreleased]: https://github.com/enchanter-ai/djinn/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/enchanter-ai/djinn/releases/tag/v0.1.0
