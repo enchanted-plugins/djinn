@@ -2,7 +2,7 @@
 state_io.py — atomic write-tmp-rename persistence helpers.
 
 Every JSON state file in Djinn goes through `atomic_write_json`. No direct
-open('w') on state paths, ever. See `shared/conduct/verification.md` and
+open('w') on state paths, ever. See `shared/foundations/conduct/verification.md` and
 Emu's save-checkpoint.sh for the invariant this enforces.
 
 Stdlib only.

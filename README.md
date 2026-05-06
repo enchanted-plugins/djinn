@@ -277,18 +277,18 @@ Twelve behavioral modules live in [`shared/conduct/`](shared/conduct/). They app
 
 | Module | Covers |
 |--------|--------|
-| [discipline](shared/conduct/discipline.md) | Think-first, simplicity, surgical edits, goal-driven loops |
-| [context](shared/conduct/context.md) | Attention-budget hygiene, U-curve placement, checkpoint protocol |
-| [verification](shared/conduct/verification.md) | Independent checks, baseline snapshots, dry-run for destructive ops |
-| [delegation](shared/conduct/delegation.md) | Subagent contracts, tool whitelisting, parallel vs. serial rules |
-| [failure-modes](shared/conduct/failure-modes.md) | 14-code taxonomy for `learnings.jsonl` so D5 can aggregate |
-| [tool-use](shared/conduct/tool-use.md) | Tool-choice hygiene, error payload contract, parallel-dispatch rules |
-| [formatting](shared/conduct/formatting.md) | Per-target format, prefill + stop sequences |
-| [skill-authoring](shared/conduct/skill-authoring.md) | SKILL.md frontmatter discipline, discovery test |
-| [hooks](shared/conduct/hooks.md) | Advisory-only hooks, injection over denial, fail-open |
-| [precedent](shared/conduct/precedent.md) | Log self-observed failures to `state/precedent-log.md` |
-| [tier-sizing](shared/conduct/tier-sizing.md) | Agent-tier budget allocation per task class |
-| [web-fetch](shared/conduct/web-fetch.md) | External-URL-handling hygiene |
+| [discipline](shared/foundations/conduct/discipline.md) | Think-first, simplicity, surgical edits, goal-driven loops |
+| [context](shared/foundations/conduct/context.md) | Attention-budget hygiene, U-curve placement, checkpoint protocol |
+| [verification](shared/foundations/conduct/verification.md) | Independent checks, baseline snapshots, dry-run for destructive ops |
+| [delegation](shared/foundations/conduct/delegation.md) | Subagent contracts, tool whitelisting, parallel vs. serial rules |
+| [failure-modes](shared/foundations/conduct/failure-modes.md) | 14-code taxonomy for `learnings.jsonl` so D5 can aggregate |
+| [tool-use](shared/foundations/conduct/tool-use.md) | Tool-choice hygiene, error payload contract, parallel-dispatch rules |
+| [formatting](shared/foundations/conduct/formatting.md) | Per-target format, prefill + stop sequences |
+| [skill-authoring](shared/foundations/conduct/skill-authoring.md) | SKILL.md frontmatter discipline, discovery test |
+| [hooks](shared/foundations/conduct/hooks.md) | Advisory-only hooks, injection over denial, fail-open |
+| [precedent](shared/foundations/conduct/precedent.md) | Log self-observed failures to `state/precedent-log.md` |
+| [tier-sizing](shared/foundations/conduct/tier-sizing.md) | Agent-tier budget allocation per task class |
+| [web-fetch](shared/foundations/conduct/web-fetch.md) | External-URL-handling hygiene |
 
 ## Architecture
 

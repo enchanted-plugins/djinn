@@ -6,19 +6,19 @@ Audience: Claude. Djinn pins the original session intent, watches for long-horiz
 
 These apply to every skill in every plugin. Load once; do not re-derive.
 
-- @shared/conduct/discipline.md — coding conduct: think-first, simplicity, surgical edits, goal-driven loops
-- @shared/conduct/doubt-engine.md — adversarial self-check before agreement; the active counter to F01 sycophancy
-- @shared/conduct/context.md — attention-budget hygiene, U-curve placement, checkpoint protocol
-- @shared/conduct/verification.md — independent checks, baseline snapshots, dry-run for destructive ops
-- @shared/conduct/delegation.md — subagent contracts, tool whitelisting, parallel vs. serial rules
-- @shared/conduct/failure-modes.md — 14-code taxonomy for accumulated-learning logs
-- @shared/conduct/tool-use.md — tool-choice hygiene, error payload contract, parallel-dispatch rules
-- @shared/conduct/formatting.md — per-target format (XML/Markdown/minimal/few-shot), prefill + stop sequences
-- @shared/conduct/skill-authoring.md — SKILL.md frontmatter discipline, discovery test
-- @shared/conduct/hooks.md — advisory-only hooks, injection over denial, fail-open
-- @shared/conduct/precedent.md — log self-observed failures to `state/precedent-log.md`; consult before risky steps
-- @shared/conduct/tier-sizing.md — agent-tier budget allocation per task class
-- @shared/conduct/web-fetch.md — external-URL-handling hygiene
+- @shared/foundations/conduct/discipline.md — coding conduct: think-first, simplicity, surgical edits, goal-driven loops
+- @shared/foundations/conduct/doubt-engine.md — adversarial self-check before agreement; the active counter to F01 sycophancy
+- @shared/foundations/conduct/context.md — attention-budget hygiene, U-curve placement, checkpoint protocol
+- @shared/foundations/conduct/verification.md — independent checks, baseline snapshots, dry-run for destructive ops
+- @shared/foundations/conduct/delegation.md — subagent contracts, tool whitelisting, parallel vs. serial rules
+- @shared/foundations/conduct/failure-modes.md — 14-code taxonomy for accumulated-learning logs
+- @shared/foundations/conduct/tool-use.md — tool-choice hygiene, error payload contract, parallel-dispatch rules
+- @shared/foundations/conduct/formatting.md — per-target format (XML/Markdown/minimal/few-shot), prefill + stop sequences
+- @shared/foundations/conduct/skill-authoring.md — SKILL.md frontmatter discipline, discovery test
+- @shared/foundations/conduct/hooks.md — advisory-only hooks, injection over denial, fail-open
+- @shared/foundations/conduct/precedent.md — log self-observed failures to `state/precedent-log.md`; consult before risky steps
+- @shared/foundations/conduct/tier-sizing.md — agent-tier budget allocation per task class
+- @shared/foundations/conduct/web-fetch.md — external-URL-handling hygiene
 
 When a module conflicts with a plugin-local instruction, the plugin wins — but log the override.
 
