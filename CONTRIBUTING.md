@@ -26,7 +26,7 @@ cd ../../ && bash tests/run-all.sh               # smoke tests
 
 1. **Run the generator.** `python docs/architecture/generate.py` — regenerates the four `.mmd` diagrams + `index.html`. Commit the result.
 2. **Run the tests.** `bash tests/run-all.sh` — every sub-plugin's `tests/` dir must return zero.
-3. **Verify the conduct modules are current.** `shared/conduct/*.md` are the universal behavioral contract. Compare against upstream (`enchanter-ai/wixie`); if they've drifted, rebase before proceeding.
+3. **Verify the conduct modules are current.** `shared/foundations/conduct/*.md` are the universal behavioral contract. Compare against upstream (`enchanter-ai/wixie`); if they've drifted, rebase before proceeding.
 4. **Check the brand standard.** Every engine named. Every agent tiered. No sibling-identifier leaks. No hand-edited diagrams.
 
 ## Commit conventions

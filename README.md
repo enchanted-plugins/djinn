@@ -273,7 +273,7 @@ Full derivations live in [docs/science/README.md](docs/science/README.md). Each 
 
 ## Agent Conduct (12 Modules)
 
-Twelve behavioral modules live in [`shared/conduct/`](shared/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanter-ai/schematic) canonical template and not edited by Djinn.
+Twelve behavioral modules live in [`shared/foundations/conduct/`](shared/foundations/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanter-ai/schematic) canonical template and not edited by Djinn.
 
 | Module | Covers |
 |--------|--------|
@@ -316,7 +316,7 @@ Djinn follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Breaki
 
 Pull requests welcome — read [CONTRIBUTING.md](CONTRIBUTING.md) first. Key rules:
 
-- Do not edit `shared/conduct/*.md` in a Djinn PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo.
+- Do not edit `shared/foundations/conduct/*.md` in a Djinn PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo.
 - Every new engine needs an Author-Year docstring citation and a `docs/science/README.md` section.
 - Every hook script opens with the subagent-loop guard and exits 0 fail-open.
 - Honest-numbers contract on every advisory: no N, no advisory.
