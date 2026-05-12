@@ -165,15 +165,13 @@ Claude Code resolves the dependency list and installs all 6 sub-plugins. Verify 
 
 ## Quickstart
 
-```
-/plugin install full@djinn
-# ...start a normal session with a clear first-turn goal...
-# ...work for a while, let /compact fire...
-/rank
+```bash
+git clone https://github.com/enchanter-ai/djinn
+cd djinn
+./scripts/bootstrap.sh    # canonical first command — installs enchanter-foundations sibling
 ```
 
-Expected: `/rank` returns the top-5 utterances by PageRank score with their D1 alignment. On drift, `drift-aligner` has already emitted a stderr advisory with the honest-numbers tuple. See [docs/getting-started.md](docs/getting-started.md) for the guided first run.
-
+Without `./scripts/bootstrap.sh`, conduct imports will silently miss and Claude Code's `@`-loader will fail-soft. Always bootstrap first.
 ## 6 Sub-Plugins, 3 Agents, 5 Engines
 
 | Sub-plugin | Owns | Trigger | Agent |
