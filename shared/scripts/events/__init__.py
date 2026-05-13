@@ -2,7 +2,7 @@
 Djinn event-bus helpers — typed wrappers over shared.scripts.publish.publish.
 
 Exposes one function per published topic listed in `CLAUDE.md § Events`.
-Every helper is fail-open per ../enchanter-foundations/packages/core/conduct/hooks.md — advisory, never raises.
+Every helper is fail-open per ../foundations/packages/core/conduct/hooks.md — advisory, never raises.
 
 Phase-1 file-tail fallback: publishes go through Pech's `publish.py` (copied
 verbatim into `shared/scripts/publish.py`) which JSONL-appends events to the

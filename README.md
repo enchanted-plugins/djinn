@@ -168,7 +168,7 @@ Claude Code resolves the dependency list and installs all 6 sub-plugins. Verify 
 ```bash
 git clone https://github.com/enchanter-ai/djinn
 cd djinn
-./scripts/bootstrap.sh    # canonical first command — installs enchanter-foundations sibling
+./scripts/bootstrap.sh    # canonical first command — installs foundations sibling
 ```
 
 Without `./scripts/bootstrap.sh`, conduct imports will silently miss and Claude Code's `@`-loader will fail-soft. Always bootstrap first.
@@ -275,18 +275,18 @@ Twelve behavioral modules live in [`shared/foundations/conduct/`](shared/foundat
 
 | Module | Covers |
 |--------|--------|
-| [discipline](../enchanter-foundations/packages/core/conduct/discipline.md) | Think-first, simplicity, surgical edits, goal-driven loops |
-| [context](../enchanter-foundations/packages/core/conduct/context.md) | Attention-budget hygiene, U-curve placement, checkpoint protocol |
-| [verification](../enchanter-foundations/packages/core/conduct/verification.md) | Independent checks, baseline snapshots, dry-run for destructive ops |
-| [delegation](../enchanter-foundations/packages/core/conduct/delegation.md) | Subagent contracts, tool whitelisting, parallel vs. serial rules |
-| [failure-modes](../enchanter-foundations/packages/core/conduct/failure-modes.md) | 14-code taxonomy for `learnings.jsonl` so D5 can aggregate |
-| [tool-use](../enchanter-foundations/packages/core/conduct/tool-use.md) | Tool-choice hygiene, error payload contract, parallel-dispatch rules |
-| [formatting](../enchanter-foundations/packages/skills/conduct/formatting.md) | Per-target format, prefill + stop sequences |
-| [skill-authoring](../enchanter-foundations/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline, discovery test |
-| [hooks](../enchanter-foundations/packages/core/conduct/hooks.md) | Advisory-only hooks, injection over denial, fail-open |
-| [precedent](../enchanter-foundations/packages/core/conduct/precedent.md) | Log self-observed failures to `state/precedent-log.md` |
-| [tier-sizing](../enchanter-foundations/packages/core/conduct/tier-sizing.md) | Agent-tier budget allocation per task class |
-| [web-fetch](../enchanter-foundations/packages/web/conduct/web-fetch.md) | External-URL-handling hygiene |
+| [discipline](../foundations/packages/core/conduct/discipline.md) | Think-first, simplicity, surgical edits, goal-driven loops |
+| [context](../foundations/packages/core/conduct/context.md) | Attention-budget hygiene, U-curve placement, checkpoint protocol |
+| [verification](../foundations/packages/core/conduct/verification.md) | Independent checks, baseline snapshots, dry-run for destructive ops |
+| [delegation](../foundations/packages/core/conduct/delegation.md) | Subagent contracts, tool whitelisting, parallel vs. serial rules |
+| [failure-modes](../foundations/packages/core/conduct/failure-modes.md) | 14-code taxonomy for `learnings.jsonl` so D5 can aggregate |
+| [tool-use](../foundations/packages/core/conduct/tool-use.md) | Tool-choice hygiene, error payload contract, parallel-dispatch rules |
+| [formatting](../foundations/packages/skills/conduct/formatting.md) | Per-target format, prefill + stop sequences |
+| [skill-authoring](../foundations/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline, discovery test |
+| [hooks](../foundations/packages/core/conduct/hooks.md) | Advisory-only hooks, injection over denial, fail-open |
+| [precedent](../foundations/packages/core/conduct/precedent.md) | Log self-observed failures to `state/precedent-log.md` |
+| [tier-sizing](../foundations/packages/core/conduct/tier-sizing.md) | Agent-tier budget allocation per task class |
+| [web-fetch](../foundations/packages/web/conduct/web-fetch.md) | External-URL-handling hygiene |
 
 ## Architecture
 
