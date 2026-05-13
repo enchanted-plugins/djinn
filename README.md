@@ -168,7 +168,7 @@ Claude Code resolves the dependency list and installs all 6 sub-plugins. Verify 
 ```bash
 git clone https://github.com/enchanter-ai/djinn
 cd djinn
-./scripts/bootstrap.sh    # canonical first command — installs foundations sibling
+./scripts/bootstrap.sh    # canonical first command — installs vis sibling
 ```
 
 Without `./scripts/bootstrap.sh`, conduct imports will silently miss and Claude Code's `@`-loader will fail-soft. Always bootstrap first.
@@ -271,22 +271,22 @@ Full derivations live in [docs/science/README.md](docs/science/README.md). Each 
 
 ## Agent Conduct (12 Modules)
 
-Twelve behavioral modules live in [`shared/foundations/conduct/`](shared/foundations/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanter-ai/schematic) canonical template and not edited by Djinn.
+Twelve behavioral modules live in [`shared/vis/conduct/`](shared/vis/conduct/). They apply to every skill and every hook. Inherited verbatim from the [schematic](https://github.com/enchanter-ai/schematic) canonical template and not edited by Djinn.
 
 | Module | Covers |
 |--------|--------|
-| [discipline](../foundations/packages/core/conduct/discipline.md) | Think-first, simplicity, surgical edits, goal-driven loops |
-| [context](../foundations/packages/core/conduct/context.md) | Attention-budget hygiene, U-curve placement, checkpoint protocol |
-| [verification](../foundations/packages/core/conduct/verification.md) | Independent checks, baseline snapshots, dry-run for destructive ops |
-| [delegation](../foundations/packages/core/conduct/delegation.md) | Subagent contracts, tool whitelisting, parallel vs. serial rules |
-| [failure-modes](../foundations/packages/core/conduct/failure-modes.md) | 14-code taxonomy for `learnings.jsonl` so D5 can aggregate |
-| [tool-use](../foundations/packages/core/conduct/tool-use.md) | Tool-choice hygiene, error payload contract, parallel-dispatch rules |
-| [formatting](../foundations/packages/skills/conduct/formatting.md) | Per-target format, prefill + stop sequences |
-| [skill-authoring](../foundations/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline, discovery test |
-| [hooks](../foundations/packages/core/conduct/hooks.md) | Advisory-only hooks, injection over denial, fail-open |
-| [precedent](../foundations/packages/core/conduct/precedent.md) | Log self-observed failures to `state/precedent-log.md` |
-| [tier-sizing](../foundations/packages/core/conduct/tier-sizing.md) | Agent-tier budget allocation per task class |
-| [web-fetch](../foundations/packages/web/conduct/web-fetch.md) | External-URL-handling hygiene |
+| [discipline](../vis/packages/core/conduct/discipline.md) | Think-first, simplicity, surgical edits, goal-driven loops |
+| [context](../vis/packages/core/conduct/context.md) | Attention-budget hygiene, U-curve placement, checkpoint protocol |
+| [verification](../vis/packages/core/conduct/verification.md) | Independent checks, baseline snapshots, dry-run for destructive ops |
+| [delegation](../vis/packages/core/conduct/delegation.md) | Subagent contracts, tool whitelisting, parallel vs. serial rules |
+| [failure-modes](../vis/packages/core/conduct/failure-modes.md) | 14-code taxonomy for `learnings.jsonl` so D5 can aggregate |
+| [tool-use](../vis/packages/core/conduct/tool-use.md) | Tool-choice hygiene, error payload contract, parallel-dispatch rules |
+| [formatting](../vis/packages/skills/conduct/formatting.md) | Per-target format, prefill + stop sequences |
+| [skill-authoring](../vis/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline, discovery test |
+| [hooks](../vis/packages/core/conduct/hooks.md) | Advisory-only hooks, injection over denial, fail-open |
+| [precedent](../vis/packages/core/conduct/precedent.md) | Log self-observed failures to `state/precedent-log.md` |
+| [tier-sizing](../vis/packages/core/conduct/tier-sizing.md) | Agent-tier budget allocation per task class |
+| [web-fetch](../vis/packages/web/conduct/web-fetch.md) | External-URL-handling hygiene |
 
 ## Architecture
 
@@ -314,7 +314,7 @@ Djinn follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Breaki
 
 Pull requests welcome — read [CONTRIBUTING.md](CONTRIBUTING.md) first. Key rules:
 
-- Do not edit `shared/foundations/conduct/*.md` in a Djinn PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo.
+- Do not edit `shared/vis/conduct/*.md` in a Djinn PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo.
 - Every new engine needs an Author-Year docstring citation and a `docs/science/README.md` section.
 - Every hook script opens with the subagent-loop guard and exits 0 fail-open.
 - Honest-numbers contract on every advisory: no N, no advisory.
