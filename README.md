@@ -1,7 +1,7 @@
 # Djinn
 
 <p align="center">
-  <img src="docs/assets/social-preview.jpg" alt="Djinn mascot" width="1280">
+  <img src="docs/assets/hero.png" alt="Djinn mascot" width="1280">
 </p>
 
 <p>
