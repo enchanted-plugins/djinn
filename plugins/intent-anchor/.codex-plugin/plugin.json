@@ -1,0 +1,27 @@
+{
+  "name": "intent-anchor",
+  "version": "0.1.0",
+  "description": "Captures the first-turn session intent into state/anchor.json on SessionStart; refreshes the anchor on UserPromptSubmit when the developer adds new constraints. Owns engines D1 (Hunt-Szymanski LCS) and D3 (Vitter reservoir).",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "intent-preservation",
+    "session-anchor"
+  ],
+  "interface": {
+    "displayName": "Intent Anchor",
+    "shortDescription": "Captures the first-turn session intent into state/anchor.json on SessionStart;\u2026",
+    "longDescription": "Captures the first-turn session intent into state/anchor.json on SessionStart; refreshes the anchor on UserPromptSubmit when the developer adds new constraints. Owns engines D1 (Hunt-Szymanski LCS) and D3 (Vitter reservoir).",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Intent Anchor on my project"
+    ]
+  }
+}

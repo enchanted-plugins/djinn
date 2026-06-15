@@ -1,0 +1,27 @@
+{
+  "name": "drift-learning",
+  "version": "0.1.0",
+  "description": "Per-(intent-type \u00d7 developer) drift-signature posterior persisted via D5 Gauss Accumulation. PreCompact hook captures session summary statistics into the posterior with 30-day EMA half-life. Lets a 'research' session earn a wider tolerated drift band than a 'bugfix' session.",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "gauss-accumulation",
+    "cross-session-learning"
+  ],
+  "interface": {
+    "displayName": "Drift Learning",
+    "shortDescription": "Per-(intent-type \u00d7 developer) drift-signature posterior persisted via D5 Gauss\u2026",
+    "longDescription": "Per-(intent-type \u00d7 developer) drift-signature posterior persisted via D5 Gauss Accumulation. PreCompact hook captures session summary statistics into the posterior with 30-day EMA half-life. Lets a 'research' session earn a wider tolerated drift band than a 'bugfix' session.",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Drift Learning on my project"
+    ]
+  }
+}

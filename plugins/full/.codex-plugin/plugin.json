@@ -1,0 +1,27 @@
+{
+  "name": "full",
+  "version": "0.1.0",
+  "description": "Djinn meta-plugin. One install pulls in all six Djinn sub-plugins via dependency resolution: intent-anchor, drift-aligner, compact-guard, utterance-rank, drift-learning, intent-reorient.",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "djinn",
+    "meta-plugin"
+  ],
+  "interface": {
+    "displayName": "Full",
+    "shortDescription": "Djinn meta-plugin. One install pulls in all six Djinn sub-plugins via dependenc\u2026",
+    "longDescription": "Djinn meta-plugin. One install pulls in all six Djinn sub-plugins via dependency resolution: intent-anchor, drift-aligner, compact-guard, utterance-rank, drift-learning, intent-reorient.",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Full on my project"
+    ]
+  }
+}

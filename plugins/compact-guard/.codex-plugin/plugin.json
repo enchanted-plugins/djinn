@@ -1,0 +1,27 @@
+{
+  "name": "compact-guard",
+  "version": "0.1.0",
+  "description": "PreCompact hook that injects the captured session-intent anchor as a structural hint BEFORE the compaction model sees the context. Survival of the original goal is structurally guaranteed by the hook lifecycle \u2014 not left to the compactor's recency bias. Owns engine D1 (LCS for survival-check).",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "compact",
+    "intent-injection"
+  ],
+  "interface": {
+    "displayName": "Compact Guard",
+    "shortDescription": "PreCompact hook that injects the captured session-intent anchor as a structural\u2026",
+    "longDescription": "PreCompact hook that injects the captured session-intent anchor as a structural hint BEFORE the compaction model sees the context. Survival of the original goal is structurally guaranteed by the hook lifecycle \u2014 not left to the compactor's recency bias. Owns engine D1 (LCS for survival-check).",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Compact Guard on my project"
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "name": "djinn",
+  "interface": {
+    "displayName": "Djinn"
+  },
+  "plugins": [
+    {
+      "name": "compact-guard",
+      "source": {
+        "source": "local",
+        "path": "./plugins/compact-guard"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "drift-aligner",
+      "source": {
+        "source": "local",
+        "path": "./plugins/drift-aligner"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "drift-learning",
+      "source": {
+        "source": "local",
+        "path": "./plugins/drift-learning"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "full",
+      "source": {
+        "source": "local",
+        "path": "./plugins/full"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "intent-anchor",
+      "source": {
+        "source": "local",
+        "path": "./plugins/intent-anchor"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "intent-reorient",
+      "source": {
+        "source": "local",
+        "path": "./plugins/intent-reorient"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "utterance-rank",
+      "source": {
+        "source": "local",
+        "path": "./plugins/utterance-rank"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

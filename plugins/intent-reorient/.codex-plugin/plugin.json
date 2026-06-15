@@ -1,0 +1,28 @@
+{
+  "name": "intent-reorient",
+  "version": "0.1.0",
+  "description": "Developer-facing skill for manual re-pinning of the session intent mid-session. Invoked via /reorient when the developer wants to override the captured anchor with a new goal. Also hosts the orchestrator Opus-tier judgment agent.",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "intent-preservation",
+    "manual-reorient"
+  ],
+  "interface": {
+    "displayName": "Intent Reorient",
+    "shortDescription": "Developer-facing skill for manual re-pinning of the session intent mid-session.\u2026",
+    "longDescription": "Developer-facing skill for manual re-pinning of the session intent mid-session. Invoked via /reorient when the developer wants to override the captured anchor with a new goal. Also hosts the orchestrator Opus-tier judgment agent.",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Intent Reorient on my project"
+    ]
+  },
+  "skills": "./skills/"
+}
