@@ -1,7 +1,19 @@
 """
-D1 — Hunt-Szymanski Longest Common Subsequence Alignment
-Reference: Hunt J.W. and Szymanski T.G. (1977), "A fast algorithm for computing longest common subsequences", Communications of the ACM 20(5):350-353.
+D1 — Token-sequence similarity ratio (drift proxy)
+
+Implementation: difflib.SequenceMatcher (Ratcliff-Obershelp gestalt pattern
+matching), NOT the Hunt-Szymanski LCS algorithm this module was previously
+labelled with. SequenceMatcher.ratio() is 2*M/T over matching blocks, which is
+not longest-common-subsequence length; the earlier citation to Hunt & Szymanski
+(1977), CACM 20(5):350-353 was inaccurate and has been removed.
+
 Role: Per-turn intent-preservation score against the anchored goal.
+
+LIMITATION (VF-07 — construct validity): this ratio measures lexical overlap
+with the anchor text, not task-relevant progress. It ranks echoing the prompt
+verbatim (~1.0) above genuine on-task work — in review fixtures, running the
+relevant tests scored ~0.29, BELOW an off-task CSS edit at ~0.30. Do not gate
+drift decisions on this score alone; it needs replacing before it is relied on.
 """
 from __future__ import annotations
 import difflib, re
