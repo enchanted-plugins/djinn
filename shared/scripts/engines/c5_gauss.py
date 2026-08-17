@@ -1,6 +1,6 @@
 """
 D5 — Gauss Accumulation (Intent-Type Drift Signature)
-Reference: Gauss C.F. (1809), "Theoria motus corporum coelestium" — least-squares foundation for recursive EMA-with-posterior updates.
+Reference: Brown R.G. (1956), "Exponential Smoothing for Predicting Demand"; Holt C.C. (1957), "Forecasting Trends and Seasonals by Exponentially Weighted Moving Averages" — exponential-smoothing foundation for the EMA update, paired with a conjugate Beta-Binomial posterior for the accept/reject signal.
 Role: Per-(intent-type, developer) drift-threshold posterior with 30-day EMA half-life.
 
 Stdlib only. Atomic write-tmp-rename persistence is handled by callers; this module is
