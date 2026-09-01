@@ -76,6 +76,16 @@ Secret scanning, vulnerability detection, action guarding, config shielding, and
 
 [Repository](https://github.com/enchanter-ai/hydra) · v1.0.0 · 6 plugins
 
+### Djinn — Intent-Drift Guardrail
+
+3 agents. Pins the original session intent, watches for long-horizon drift across `/compact`, and reasserts the goal when the agent diverges.
+
+```
+/plugin marketplace add enchanter-ai/djinn
+```
+
+[Repository](https://github.com/enchanter-ai/djinn) · v0.1.0 · 7 plugins
+
 ### Sylph — Git Workflow Layer
 
 Auto-orchestrates branch / commit / PR per task boundary; reads CI status across 9 hosts and 8 CI systems.
