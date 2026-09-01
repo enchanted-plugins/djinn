@@ -44,7 +44,7 @@ The math isn't documentation. It runs as code.
 /plugin marketplace add enchanter-ai/wixie
 ```
 
-[Repository](https://github.com/enchanter-ai/wixie) · v3.0.0 · 7 plugins · [Science](https://github.com/enchanter-ai/wixie/blob/main/docs/science/README.md)
+[Repository](https://github.com/enchanter-ai/wixie) · v4.0.0 · 7 plugins · [Science](https://github.com/enchanter-ai/wixie/blob/main/docs/science/README.md)
 
 ### Emu — Context Health Toolkit
 
